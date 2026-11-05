@@ -1,0 +1,11 @@
+.git
+.gitignore
+.venv
+backend/.venv
+**/__pycache__
+**/*.pyc
+frontend/node_modules
+.pytest_cache
+freelance_finance.db
+.env
+Agy/
