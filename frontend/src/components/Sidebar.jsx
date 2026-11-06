@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import {
   LayoutDashboard,
   ArrowLeftRight,
@@ -63,6 +64,15 @@ const navigationGroups = [
 ];
 
 export function Sidebar({ isOpen, onClose }) {
+  const { user } = useAuth();
+  const displayName = user?.full_name || 'Independent Freelancer';
+  const initials = displayName
+    .split(' ')
+    .filter(Boolean)
+    .map(n => n.charAt(0))
+    .join('')
+    .slice(0, 2)
+    .toUpperCase() || 'FL';
   return (
     <>
       {/* Mobile backdrop */}
@@ -119,11 +129,13 @@ export function Sidebar({ isOpen, onClose }) {
         <div className="sidebar-footer p-4 border-t">
           <div className="flex items-center gap-3">
             <div className="sidebar-avatar w-8 h-8 rounded-full flex items-center justify-center font-semibold text-xs">
-              FL
+              {initials}
             </div>
             <div className="overflow-hidden">
-              <p className="sidebar-user-name text-xs font-medium truncate">Independent Freelancer</p>
-              <p className="text-[10px] text-[var(--analytics-text)] font-mono">● Production Engine</p>
+              <p className="sidebar-user-name text-xs font-medium truncate">{displayName}</p>
+              <p className="text-[10px] text-[var(--analytics-text)] font-mono">
+                {user?.is_guest ? '○ Guest Mode' : '● Production Engine'}
+              </p>
             </div>
           </div>
         </div>
