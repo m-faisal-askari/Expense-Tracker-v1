@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Save, User, Globe, Shield, CheckCircle2, FileText, Scale, Lock, ExternalLink } from 'lucide-react';
 import { api } from '../api/client';
+import { useAuth } from '../contexts/AuthContext';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 
 export function Settings() {
   const queryClient = useQueryClient();
+  const { user, refreshUser } = useAuth();
   const [successMsg, setSuccessMsg] = useState('');
 
   const { data: profile, isLoading } = useQuery({
@@ -24,23 +26,38 @@ export function Settings() {
   });
 
   useEffect(() => {
-    if (profile) {
-      setForm({
-        full_name: profile.full_name || '',
-        email: profile.email || '',
-        base_currency: profile.base_currency || 'USD',
-        country: profile.country || 'US',
-        fiscal_year_start: profile.fiscal_year_start || 1,
-        tax_reserve_rate: profile.tax_reserve_rate ? String(profile.tax_reserve_rate) : '25.00'
-      });
+    // Prioritize authenticated user details (such as from OAuth) and saved profile info
+    const resolvedName = (user?.full_name && user.full_name !== 'Freelancer' && user.full_name !== 'Independent Freelancer' && user.full_name !== 'Guest Freelancer')
+      ? user.full_name
+      : ((profile?.full_name && profile.full_name !== 'Independent Freelancer' && profile.full_name !== 'Guest Freelancer')
+        ? profile.full_name
+        : (user?.full_name || profile?.full_name || ''));
+
+    const resolvedEmail = (user?.email && !user.email.includes('@freelancer.local') && !user.email.includes('guest@'))
+      ? user.email
+      : ((profile?.email && !profile.email.includes('@freelancer.local'))
+        ? profile.email
+        : (user?.email || profile?.email || ''));
+
+    if (profile || user) {
+      setForm(prev => ({
+        ...prev,
+        full_name: resolvedName || prev.full_name,
+        email: resolvedEmail || prev.email,
+        base_currency: profile?.base_currency || prev.base_currency || 'USD',
+        country: profile?.country || prev.country || 'US',
+        fiscal_year_start: profile?.fiscal_year_start || prev.fiscal_year_start || 1,
+        tax_reserve_rate: profile?.tax_reserve_rate ? String(profile.tax_reserve_rate) : prev.tax_reserve_rate
+      }));
     }
-  }, [profile]);
+  }, [profile, user]);
 
   const updateProfileMutation = useMutation({
     mutationFn: (data) => api.put('/auth/profile', data),
     onSuccess: (updated) => {
       queryClient.setQueryData(['userProfile'], updated);
       queryClient.invalidateQueries(['dashboardSummary']);
+      if (refreshUser) refreshUser();
       setSuccessMsg('Profile and financial settings updated successfully.');
       setTimeout(() => setSuccessMsg(''), 4000);
     }
@@ -77,7 +94,7 @@ export function Settings() {
         {/* Personal Details */}
         <div className="space-y-4">
           <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
-            <User className="w-4 h-4 text-indigo-600" />
+            <User className="w-4 h-4 text-slate-400" />
             Freelancer Identity
           </h3>
 
@@ -90,6 +107,7 @@ export function Settings() {
                 value={form.full_name}
                 onChange={(e) => setForm({ ...form, full_name: e.target.value })}
                 className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-indigo-500"
+                placeholder="e.g. Jane Doe"
               />
             </div>
             <div>
@@ -100,6 +118,7 @@ export function Settings() {
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className="w-full px-3 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-indigo-500"
+                placeholder="e.g. jane@example.com"
               />
             </div>
           </div>
@@ -108,7 +127,7 @@ export function Settings() {
         {/* Currency & Financial Configuration */}
         <div className="pt-4 border-t border-slate-100 space-y-4">
           <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
-            <Globe className="w-4 h-4 text-indigo-600" />
+            <Globe className="w-4 h-4 text-slate-400" />
             Currency & Accounting Defaults
           </h3>
 
@@ -145,7 +164,7 @@ export function Settings() {
         {/* Tax Planning Defaults */}
         <div className="pt-4 border-t border-slate-100 space-y-4">
           <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
-            <Shield className="w-4 h-4 text-indigo-600" />
+            <Shield className="w-4 h-4 text-slate-400" />
             Tax Reserve Rule
           </h3>
 
@@ -195,7 +214,7 @@ export function Settings() {
       {/* Legal & Compliance Section */}
       <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
         <div className="flex items-center gap-2 text-slate-800 font-bold text-base pb-3 border-b border-slate-100">
-          <Shield className="w-5 h-5 text-indigo-600" />
+          <Shield className="w-5 h-5 text-slate-400" />
           <h3>Legal, Privacy & Compliance Disclosures</h3>
         </div>
         <p className="text-xs text-slate-500 leading-relaxed">
@@ -206,47 +225,47 @@ export function Settings() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
           <Link
             to="/privacy"
-            className="p-3.5 rounded-xl border border-slate-200 hover:border-indigo-500 hover:bg-indigo-50/30 transition group flex flex-col justify-between"
+            className="p-3.5 rounded-xl border border-slate-200 hover:border-slate-400 hover:bg-slate-50 transition group flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between text-indigo-600 mb-1.5">
+              <div className="flex items-center justify-between text-slate-400 group-hover:text-white mb-1.5">
                 <FileText className="w-5 h-5" />
-                <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600 transition" />
+                <ExternalLink className="w-3.5 h-3.5 transition" />
               </div>
               <h4 className="font-bold text-slate-800 text-xs">Privacy Policy</h4>
               <p className="text-[11px] text-slate-500 mt-1">What data we collect, why, and how your financial records are protected.</p>
             </div>
-            <span className="text-[10px] font-semibold text-indigo-600 mt-3 block">Read Policy →</span>
+            <span className="text-[10px] font-semibold text-slate-400 group-hover:text-white mt-3 block">Read Policy →</span>
           </Link>
 
           <Link
             to="/terms"
-            className="p-3.5 rounded-xl border border-slate-200 hover:border-indigo-500 hover:bg-indigo-50/30 transition group flex flex-col justify-between"
+            className="p-3.5 rounded-xl border border-slate-200 hover:border-slate-400 hover:bg-slate-50 transition group flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between text-indigo-600 mb-1.5">
+              <div className="flex items-center justify-between text-slate-400 group-hover:text-white mb-1.5">
                 <Scale className="w-5 h-5" />
-                <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600 transition" />
+                <ExternalLink className="w-3.5 h-3.5 transition" />
               </div>
               <h4 className="font-bold text-slate-800 text-xs">Terms of Service</h4>
               <p className="text-[11px] text-slate-500 mt-1">Platform service agreement, acceptable use, and accounting disclaimers.</p>
             </div>
-            <span className="text-[10px] font-semibold text-indigo-600 mt-3 block">View Agreement →</span>
+            <span className="text-[10px] font-semibold text-slate-400 group-hover:text-white mt-3 block">View Agreement →</span>
           </Link>
 
           <Link
             to="/security"
-            className="p-3.5 rounded-xl border border-slate-200 hover:border-indigo-500 hover:bg-indigo-50/30 transition group flex flex-col justify-between"
+            className="p-3.5 rounded-xl border border-slate-200 hover:border-slate-400 hover:bg-slate-50 transition group flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between text-emerald-600 mb-1.5">
+              <div className="flex items-center justify-between text-slate-400 group-hover:text-white mb-1.5">
                 <Lock className="w-5 h-5" />
-                <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-600 transition" />
+                <ExternalLink className="w-3.5 h-3.5 transition" />
               </div>
               <h4 className="font-bold text-slate-800 text-xs">Security Safeguards</h4>
               <p className="text-[11px] text-slate-500 mt-1">Multi-tenant isolation, TLS 1.3 encryption, and Decimal engine integrity.</p>
             </div>
-            <span className="text-[10px] font-semibold text-emerald-600 mt-3 block">Learn More →</span>
+            <span className="text-[10px] font-semibold text-slate-400 group-hover:text-white mt-3 block">Learn More →</span>
           </Link>
         </div>
       </div>

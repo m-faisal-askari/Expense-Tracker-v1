@@ -52,7 +52,7 @@ export function Reports() {
         <button
           onClick={() => setActiveTab('pnl')}
           className={`pb-2.5 transition border-b-2 ${
-            activeTab === 'pnl' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-800'
+            activeTab === 'pnl' ? 'border-slate-900 text-slate-900 dark:border-white dark:text-white font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
           Profit & Loss Statement
@@ -60,7 +60,7 @@ export function Reports() {
         <button
           onClick={() => setActiveTab('aging')}
           className={`pb-2.5 transition border-b-2 ${
-            activeTab === 'aging' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-800'
+            activeTab === 'aging' ? 'border-slate-900 text-slate-900 dark:border-white dark:text-white font-bold' : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
           Invoice Aging (Receivables)
@@ -141,7 +141,7 @@ export function Reports() {
                       ))}
                       <div className="flex justify-between py-2 border-t border-slate-200 font-bold text-slate-900">
                         <span>Net Operating Revenue</span>
-                        <span className="font-mono text-emerald-600">{formatCurrency(pnl.net_revenue)}</span>
+                        <span className="font-mono text-[var(--analytics-text)]">{formatCurrency(pnl.net_revenue)}</span>
                       </div>
                     </div>
                   </div>
@@ -160,18 +160,18 @@ export function Reports() {
                       ))}
                       <div className="flex justify-between py-2 border-t border-slate-200 font-bold text-slate-900">
                         <span>Total Operating Expenses</span>
-                        <span className="font-mono text-rose-600">({formatCurrency(pnl.total_operating_expenses)})</span>
+                        <span className="font-mono text-rose-500">({formatCurrency(pnl.total_operating_expenses)})</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Bottom Line */}
-                  <div className="pt-4 border-t-2 border-slate-900 flex justify-between items-baseline text-sm">
+                  <div className="pt-4 border-t-2 border-slate-900 dark:border-zinc-700 flex justify-between items-baseline text-sm">
                     <div>
                       <span className="font-bold text-slate-900">Net Business Profit</span>
                       <span className="text-xs text-slate-500 block font-normal">Margin: {pnl.profit_margin_percentage}%</span>
                     </div>
-                    <span className="text-xl font-bold font-mono text-indigo-600">
+                    <span className="text-xl font-bold font-mono text-[var(--analytics-text)]">
                       {formatCurrency(pnl.operating_profit)}
                     </span>
                   </div>
@@ -193,23 +193,23 @@ export function Reports() {
               <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
                 <div className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs text-center">
                   <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Current</span>
-                  <span className="text-sm font-bold text-slate-900">{formatCurrency(aging.summary.current)}</span>
+                  <span className="text-sm font-bold font-mono text-[var(--analytics-text)]">{formatCurrency(aging.summary.current)}</span>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs text-center">
                   <span className="text-[10px] text-amber-500 font-bold uppercase tracking-wider block">1-30 Days</span>
-                  <span className="text-sm font-bold text-slate-900">{formatCurrency(aging.summary.overdue_1_30)}</span>
+                  <span className="text-sm font-bold font-mono text-slate-900">{formatCurrency(aging.summary.overdue_1_30)}</span>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs text-center">
                   <span className="text-[10px] text-orange-500 font-bold uppercase tracking-wider block">31-60 Days</span>
-                  <span className="text-sm font-bold text-slate-900">{formatCurrency(aging.summary.overdue_31_60)}</span>
+                  <span className="text-sm font-bold font-mono text-slate-900">{formatCurrency(aging.summary.overdue_31_60)}</span>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs text-center">
                   <span className="text-[10px] text-rose-500 font-bold uppercase tracking-wider block">61-90 Days</span>
-                  <span className="text-sm font-bold text-slate-900">{formatCurrency(aging.summary.overdue_61_90)}</span>
+                  <span className="text-sm font-bold font-mono text-slate-900">{formatCurrency(aging.summary.overdue_61_90)}</span>
                 </div>
                 <div className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs text-center col-span-2 sm:col-span-1">
-                  <span className="text-[10px] text-rose-700 font-bold uppercase tracking-wider block">90+ Days</span>
-                  <span className="text-sm font-bold text-slate-900">{formatCurrency(aging.summary.overdue_90_plus)}</span>
+                  <span className="text-[10px] text-rose-500 font-bold uppercase tracking-wider block">90+ Days</span>
+                  <span className="text-sm font-bold font-mono text-slate-900">{formatCurrency(aging.summary.overdue_90_plus)}</span>
                 </div>
               </div>
 

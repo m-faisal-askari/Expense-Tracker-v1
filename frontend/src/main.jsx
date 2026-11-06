@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider, MutationCache } from '@tanstack/react
 import { AuthProvider } from './contexts/AuthContext';
 import { ToastProvider, useToast } from './contexts/ToastContext';
 import { CurrencyProvider } from './contexts/CurrencyContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import App from './App';
 import './index.css';
 
@@ -51,15 +52,17 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <CurrencyProvider>
-          <ToastProvider>
-            <ToastBridge>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
-            </ToastBridge>
-          </ToastProvider>
-        </CurrencyProvider>
+        <ThemeProvider>
+          <CurrencyProvider>
+            <ToastProvider>
+              <ToastBridge>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </ToastBridge>
+            </ToastProvider>
+          </CurrencyProvider>
+        </ThemeProvider>
       </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>

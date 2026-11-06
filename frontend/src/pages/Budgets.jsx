@@ -182,14 +182,14 @@ export function Budgets() {
                 <div className="mt-4">
                   <div className="flex justify-between text-xs mb-1">
                     <span className="font-semibold text-slate-700">Utilization</span>
-                    <span className={`font-bold ${isOver ? 'text-rose-600' : (isNear ? 'text-amber-600' : 'text-slate-900')}`}>
+                    <span className={`font-bold font-mono ${isOver ? 'text-rose-500' : (isNear ? 'text-amber-500' : 'text-[var(--analytics-text)]')}`}>
                       {pct.toFixed(1)}%
                     </span>
                   </div>
                   <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
                     <div
                       className={`h-2.5 rounded-full transition-all duration-300 ${
-                        isOver ? 'bg-rose-500' : (isNear ? 'bg-amber-500' : 'bg-indigo-600')
+                        isOver ? 'bg-rose-500' : (isNear ? 'bg-amber-500' : 'bg-[var(--analytics-text)]')
                       }`}
                       style={{ width: `${Math.min(100, pct)}%` }}
                     />
@@ -199,15 +199,15 @@ export function Budgets() {
                 <div className="mt-4 pt-3 border-t border-slate-100 grid grid-cols-3 gap-2 text-xs text-center">
                   <div>
                     <span className="text-[10px] text-slate-400 block font-medium">Allocated</span>
-                    <span className="font-semibold text-slate-800">{formatCurrency(b.total_allocated, defaultCurrency)}</span>
+                    <span className="font-semibold text-slate-800 font-mono">{formatCurrency(b.total_allocated, defaultCurrency)}</span>
                   </div>
                   <div>
                     <span className="text-[10px] text-slate-400 block font-medium">Spent</span>
-                    <span className="font-semibold text-slate-800">{formatCurrency(b.spent_amount, defaultCurrency)}</span>
+                    <span className="font-semibold text-slate-800 font-mono">{formatCurrency(b.spent_amount, defaultCurrency)}</span>
                   </div>
                   <div>
                     <span className="text-[10px] text-slate-400 block font-medium">Remaining</span>
-                    <span className={`font-bold ${parseFloat(b.remaining_amount) < 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
+                    <span className={`font-bold font-mono ${parseFloat(b.remaining_amount) < 0 ? 'text-rose-500' : 'text-[var(--analytics-text)]'}`}>
                       {formatCurrency(b.remaining_amount, defaultCurrency)}
                     </span>
                   </div>

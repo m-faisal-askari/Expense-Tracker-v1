@@ -197,7 +197,7 @@ export function Savings() {
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => handleOpenEdit(g)}
-                        className="text-slate-400 hover:text-indigo-600 transition p-1"
+                        className="text-slate-400 hover:text-white transition p-1"
                         title="Edit Goal"
                       >
                         <Pencil className="w-3.5 h-3.5" />
@@ -208,7 +208,7 @@ export function Savings() {
                             deleteGoalMutation.mutate(g.id);
                           }
                         }}
-                        className="text-slate-400 hover:text-rose-600 transition p-1"
+                        className="text-slate-400 hover:text-rose-500 transition p-1"
                         title="Delete Goal"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -220,11 +220,11 @@ export function Savings() {
                   <div className="mt-4">
                     <div className="flex justify-between text-xs mb-1">
                       <span className="text-slate-500 font-medium">Progress</span>
-                      <span className="font-bold text-indigo-600">{pct.toFixed(0)}%</span>
+                      <span className="font-bold font-mono text-[var(--analytics-text)]">{pct.toFixed(0)}%</span>
                     </div>
                     <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
                       <div
-                        className="h-2 rounded-full bg-indigo-600 transition-all duration-300"
+                        className="h-2 rounded-full bg-[var(--analytics-text)] transition-all duration-300"
                         style={{ width: `${Math.min(100, pct)}%` }}
                       />
                     </div>
@@ -233,7 +233,7 @@ export function Savings() {
                   <div className="mt-3 flex items-baseline justify-between text-xs">
                     <div>
                       <span className="text-[10px] text-slate-400 block font-medium">Saved</span>
-                      <span className="font-bold text-slate-900 text-base">{formatCurrency(g.current_amount, g.currency)}</span>
+                      <span className="font-bold font-mono text-[var(--analytics-text)] text-base">{formatCurrency(g.current_amount, g.currency)}</span>
                       {g.currency !== defaultCurrency && (
                         <div className="text-[10px] text-slate-400 font-normal">
                           ≈ {formatCurrency(convert(g.current_amount, g.currency), defaultCurrency)}

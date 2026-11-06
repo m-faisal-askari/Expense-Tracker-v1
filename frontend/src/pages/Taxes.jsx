@@ -122,7 +122,7 @@ export function Taxes() {
           title="Remaining Target Reserve"
           amount={s.remaining_tax_reserve_target}
           icon={ShieldAlert}
-          color="purple"
+          color="stone"
           subtitle="Recommended reserve in savings"
         />
       </div>

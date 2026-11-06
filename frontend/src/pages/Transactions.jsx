@@ -309,7 +309,7 @@ export function Transactions() {
                       <span className={`inline-flex items-center gap-1 font-medium px-2 py-0.5 rounded-full text-[10px] ${
                         tx.type === 'INCOME' 
                           ? 'bg-emerald-50 text-emerald-700' 
-                          : (tx.type === 'EXPENSE' ? 'bg-rose-50 text-rose-700' : 'bg-blue-50 text-blue-700')
+                          : (tx.type === 'EXPENSE' ? 'bg-rose-50 text-rose-700' : 'bg-slate-100 text-slate-700')
                       }`}>
                         {tx.type}
                       </span>
@@ -330,7 +330,7 @@ export function Transactions() {
                       )}
                     </td>
                     <td className="py-3 px-4 text-right whitespace-nowrap font-bold">
-                      <span className={tx.type === 'INCOME' ? 'text-emerald-600' : (tx.type === 'EXPENSE' ? 'text-slate-900' : 'text-blue-600')}>
+                      <span className={tx.type === 'INCOME' ? 'text-emerald-600' : (tx.type === 'EXPENSE' ? 'text-slate-900' : 'text-slate-600')}>
                         {tx.type === 'INCOME' ? '+' : (tx.type === 'EXPENSE' ? '-' : '')}
                         {formatCurrency(tx.amount, tx.currency)}
                       </span>

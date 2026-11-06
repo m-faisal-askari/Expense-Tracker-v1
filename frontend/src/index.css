@@ -2,13 +2,505 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: light;
+  
+  /* Light Mode Palette: "a little off white color and its shades", "blue for analytics" */
+  --page-bg: #f6f8fa;
+  --page-deep: #eef2f6;
+  --surface: #ffffff;
+  --surface-soft: #f0f3f6;
+  --surface-raised: #e6ebf1;
+  --border: #e2e8f0;
+  --border-subtle: #edf2f7;
+  
+  /* Standard neutral texts for Light Mode */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  
+  /* Key Analytics: Blue */
+  --analytics-text: #2563eb;
+  --analytics-light: #3b82f6;
+  --analytics-soft: rgba(37, 99, 235, 0.08);
+  --analytics-border: rgba(37, 99, 235, 0.20);
+  
+  /* Minor part: buttons are sleek neutral high-contrast */
+  --btn-primary-bg: #0f172a;
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: #1e293b;
+  
+  /* Sidebar (shades of off-white and clean white) */
+  --sidebar-bg: #ffffff;
+  --sidebar-header: #ffffff;
+  --sidebar-border: #e2e8f0;
+  --sidebar-text: #0f172a;
+  --sidebar-muted: #64748b;
+  --sidebar-hover: #f1f5f9;
+  --sidebar-active-bg: #f1f5f9;
+  --sidebar-active-text: #0f172a;
+  --sidebar-mark-bg: #0f172a;
+  --sidebar-mark-text: #ffffff;
+  
+  /* Charts: Blue-type palette */
+  --chart-income: #2563eb;
+  --chart-income-fill: rgba(37, 99, 235, 0.22);
+  --chart-expense: #60a5fa;
+  --chart-expense-fill: rgba(96, 165, 250, 0.15);
+  --chart-grid: #e2e8f0;
+  --chart-label: #64748b;
+  --chart-tooltip: #ffffff;
+  --chart-tooltip-text: #0f172a;
+  --chart-category-1: #2563eb;
+  --chart-category-2: #3b82f6;
+  --chart-category-3: #1d4ed8;
+  --chart-category-4: #60a5fa;
+  --chart-category-5: #93c5fd;
+  --chart-category-6: #1e40af;
+  --chart-category-7: #0284c7;
+  
+  /* Subtle status indicators */
+  --success: #059669;
+  --success-bg: #ecfdf5;
+  --success-border: #a7f3d0;
+  --warning: #d97706;
+  --warning-bg: #fffbeb;
+  --warning-border: #fde68a;
+  --danger: #dc2626;
+  --danger-bg: #fef2f2;
+  --danger-border: #fecaca;
+  --info: #0284c7;
+  --info-bg: #f0f9ff;
+  --info-border: #bae6fd;
+}
+
+html[data-theme="dark"],
+html.dark {
+  color-scheme: dark;
+  
+  /* Dark Mode Palette: "black as background (shades of black for surfaces and all)" */
+  --page-bg: #000000;
+  --page-deep: #08080a;
+  --surface: #0e0e11;
+  --surface-soft: #16161b;
+  --surface-raised: #1e1e24;
+  --border: #26262d;
+  --border-subtle: #1c1c22;
+  
+  /* "use white for texts except for text that show key analytics make them green" */
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  
+  /* Key Analytics: Green */
+  --analytics-text: #10b981;
+  --analytics-light: #34d399;
+  --analytics-soft: rgba(16, 185, 129, 0.12);
+  --analytics-border: rgba(16, 185, 129, 0.25);
+  
+  /* Minor part: buttons are sleek high-contrast white */
+  --btn-primary-bg: #ffffff;
+  --btn-primary-text: #000000;
+  --btn-primary-hover: #e4e4e7;
+  
+  /* Sidebar (shades of black) */
+  --sidebar-bg: #08080a;
+  --sidebar-header: #08080a;
+  --sidebar-border: #1c1c22;
+  --sidebar-text: #ffffff;
+  --sidebar-muted: #9ca3af;
+  --sidebar-hover: #16161b;
+  --sidebar-active-bg: #1e1e24;
+  --sidebar-active-text: #ffffff;
+  --sidebar-mark-bg: #1e1e24;
+  --sidebar-mark-text: #ffffff;
+  
+  /* Charts: Green-type palette */
+  --chart-income: #10b981;
+  --chart-income-fill: rgba(16, 185, 129, 0.25);
+  --chart-expense: #34d399;
+  --chart-expense-fill: rgba(52, 211, 153, 0.15);
+  --chart-grid: #222228;
+  --chart-label: #9ca3af;
+  --chart-tooltip: #121216;
+  --chart-tooltip-text: #ffffff;
+  --chart-category-1: #10b981;
+  --chart-category-2: #34d399;
+  --chart-category-3: #059669;
+  --chart-category-4: #6ee7b7;
+  --chart-category-5: #047857;
+  --chart-category-6: #a7f3d0;
+  --chart-category-7: #14b8a6;
+  
+  /* Subtle status indicators for dark */
+  --success: #34d399;
+  --success-bg: rgba(16, 185, 129, 0.15);
+  --success-border: rgba(16, 185, 129, 0.30);
+  --warning: #fbbf24;
+  --warning-bg: rgba(245, 158, 11, 0.15);
+  --warning-border: rgba(245, 158, 11, 0.30);
+  --danger: #f87171;
+  --danger-bg: rgba(239, 68, 68, 0.15);
+  --danger-border: rgba(239, 68, 68, 0.30);
+  --info: #38bdf8;
+  --info-bg: rgba(14, 165, 233, 0.15);
+  --info-border: rgba(14, 165, 233, 0.30);
+}
+
 @layer base {
+  html {
+    background-color: var(--page-bg);
+  }
+
   body {
-    @apply bg-slate-50 text-slate-800 antialiased selection:bg-indigo-500 selection:text-white;
+    @apply antialiased;
+    min-height: 100vh;
+    background-color: var(--page-bg);
+    color: var(--text-primary);
+  }
+
+  ::selection {
+    background-color: var(--analytics-soft);
+    color: var(--text-primary);
   }
 }
 
-/* Custom Scrollbar */
+/* =========================================================================
+   SURFACES & BACKGROUNDS
+   - Dark mode: true black background, shades of black for all surfaces
+   - Light mode: crisp off-white background and its shades
+   ========================================================================= */
+
+/* Cards, modals, containers */
+[class~="bg-white"],
+[class~="bg-white/60"],
+[class~="bg-white/95"] {
+  background-color: var(--surface) !important;
+}
+
+/* Page canvas */
+[class~="bg-slate-50"],
+[class~="bg-slate-50/50"],
+[class~="bg-slate-50/60"],
+[class~="bg-slate-50/70"],
+[class~="bg-slate-50/80"],
+[class~="bg-slate-50/90"] {
+  background-color: var(--page-bg) !important;
+}
+
+/* Soft secondary surfaces (table headers, wells, inactive items) */
+[class~="bg-slate-100"] {
+  background-color: var(--surface-soft) !important;
+}
+
+/* Raised interactive surfaces */
+[class~="bg-slate-200"] {
+  background-color: var(--surface-raised) !important;
+}
+
+/* Dark slate remapping for dark mode */
+[class~="bg-slate-800"],
+[class~="bg-slate-800/60"],
+[class~="bg-slate-800/80"] {
+  background-color: var(--surface-soft) !important;
+}
+
+[class~="bg-slate-900"] {
+  background-color: var(--surface) !important;
+}
+
+[class~="bg-slate-900/40"],
+[class~="bg-slate-900/50"],
+[class~="bg-slate-900/60"],
+[class~="bg-slate-900/90"] {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+[class~="bg-slate-950"] {
+  background-color: var(--page-deep) !important;
+}
+
+/* Hover surfaces */
+[class~="hover:bg-white"]:hover {
+  background-color: var(--surface) !important;
+}
+
+[class~="hover:bg-slate-50"]:hover,
+[class~="hover:bg-slate-50/70"]:hover,
+[class~="hover:bg-slate-50/80"]:hover {
+  background-color: var(--surface-soft) !important;
+}
+
+[class~="hover:bg-slate-100"]:hover {
+  background-color: var(--surface-raised) !important;
+}
+
+[class~="hover:bg-slate-200"]:hover {
+  background-color: var(--surface-raised) !important;
+}
+
+/* =========================================================================
+   TYPOGRAPHY
+   - Dark mode: White for texts
+   - Light mode: Slate-900 / dark slate
+   ========================================================================= */
+
+[class~="text-slate-900"],
+[class~="text-slate-800"] {
+  color: var(--text-primary) !important;
+}
+
+[class~="text-slate-700"],
+[class~="text-slate-600"],
+[class~="text-slate-300"],
+[class~="text-slate-200"] {
+  color: var(--text-secondary) !important;
+}
+
+[class~="text-slate-500"],
+[class~="text-slate-400"] {
+  color: var(--text-muted) !important;
+}
+
+[class~="hover:text-slate-700"]:hover,
+[class~="hover:text-slate-800"]:hover,
+[class~="hover:text-slate-900"]:hover {
+  color: var(--text-primary) !important;
+}
+
+/* =========================================================================
+   BORDERS
+   - Clean, subtle dark borders in dark mode; soft light borders in light mode
+   ========================================================================= */
+
+[class~="border-slate-100"],
+[class~="border-slate-200"],
+[class~="border-slate-200/80"],
+[class~="border-slate-300"],
+[class~="border-slate-700"],
+[class~="border-slate-800"],
+[class~="border-slate-800/80"] {
+  border-color: var(--border) !important;
+}
+
+/* =========================================================================
+   FORM CONTROLS (Inputs, selects, textareas)
+   ========================================================================= */
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  background-color: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--text-muted) !important;
+  outline: none !important;
+}
+
+/* =========================================================================
+   PRIMARY BUTTONS & CONTROLS
+   - Green and Blue are a minor part! Buttons use sleek high-contrast neutral
+     treatment: White in dark mode, Slate-900 in light mode.
+   ========================================================================= */
+[class~="bg-indigo-600"],
+[class~="bg-indigo-600/90"] {
+  background-color: var(--btn-primary-bg) !important;
+  color: var(--btn-primary-text) !important;
+  font-weight: 600 !important;
+}
+
+[class~="bg-indigo-700"],
+[class~="hover:bg-indigo-700"]:hover,
+[class~="hover:bg-indigo-500"]:hover {
+  background-color: var(--btn-primary-hover) !important;
+  color: var(--btn-primary-text) !important;
+}
+
+/* Secondary / soft indigo wells */
+[class~="bg-indigo-50"],
+[class~="bg-indigo-50/30"],
+[class~="bg-indigo-50/60"],
+[class~="bg-indigo-100"],
+[class~="bg-indigo-500/10"],
+[class~="bg-indigo-500/20"],
+[class~="bg-indigo-950/20"],
+[class~="bg-indigo-950/30"] {
+  background-color: var(--surface-soft) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Neutral text for link buttons */
+[class~="text-indigo-600"],
+[class~="text-indigo-700"],
+[class~="text-indigo-800"] {
+  color: var(--analytics-text) !important;
+}
+
+[class~="border-indigo-100"],
+[class~="border-indigo-200"],
+[class~="border-indigo-500/20"],
+[class~="border-indigo-800/40"],
+[class~="border-indigo-900/40"] {
+  border-color: var(--border) !important;
+}
+
+/* Focus rings */
+[class~="focus:ring-indigo-500"]:focus {
+  --tw-ring-color: var(--border) !important;
+}
+[class~="focus:border-indigo-500"]:focus {
+  border-color: var(--text-muted) !important;
+}
+
+/* =========================================================================
+   KEY ANALYTICS & METRIC VALUES
+   - In Dark mode: GREEN
+   - In Light mode: BLUE
+   ========================================================================= */
+.key-analytics-value,
+[data-metric="analytics"] {
+  color: var(--analytics-text) !important;
+}
+
+/* =========================================================================
+   STATUS BADGES & INDICATORS (Subtle, clean, not overwhelming)
+   ========================================================================= */
+[class~="bg-emerald-50"],
+[class~="bg-emerald-100"],
+[class~="bg-emerald-500/10"] {
+  background-color: var(--success-bg) !important;
+}
+
+[class~="text-emerald-400"],
+[class~="text-emerald-500"],
+[class~="text-emerald-600"],
+[class~="text-emerald-700"],
+[class~="text-emerald-800"] {
+  color: var(--success) !important;
+}
+
+[class~="border-emerald-100"],
+[class~="border-emerald-200"],
+[class~="border-emerald-500/20"] {
+  border-color: var(--success-border) !important;
+}
+
+[class~="bg-rose-50"],
+[class~="bg-rose-100"] {
+  background-color: var(--danger-bg) !important;
+}
+
+[class~="text-rose-500"],
+[class~="text-rose-600"],
+[class~="text-rose-700"] {
+  color: var(--danger) !important;
+}
+
+[class~="border-rose-100"],
+[class~="border-rose-200"] {
+  border-color: var(--danger-border) !important;
+}
+
+[class~="bg-amber-50"],
+[class~="bg-amber-100"] {
+  background-color: var(--warning-bg) !important;
+}
+
+[class~="text-amber-500"],
+[class~="text-amber-600"],
+[class~="text-amber-700"] {
+  color: var(--warning) !important;
+}
+
+[class~="border-amber-200"] {
+  border-color: var(--warning-border) !important;
+}
+
+/* =========================================================================
+   SIDEBAR NAVIGATION
+   - Dark mode: shades of black background and clean white text
+   - Light mode: crisp off-white background and slate text
+   ========================================================================= */
+.app-sidebar {
+  background-color: var(--sidebar-bg) !important;
+  border-color: var(--sidebar-border) !important;
+  color: var(--sidebar-text) !important;
+}
+
+.sidebar-header {
+  background-color: var(--sidebar-header) !important;
+  border-color: var(--sidebar-border) !important;
+}
+
+.sidebar-mark {
+  background-color: var(--sidebar-mark-bg) !important;
+  color: var(--sidebar-mark-text) !important;
+  border: 1px solid var(--sidebar-border) !important;
+}
+
+.sidebar-title {
+  color: var(--sidebar-text) !important;
+}
+
+.sidebar-caption,
+.sidebar-section-title,
+.sidebar-user-note {
+  color: var(--sidebar-muted) !important;
+}
+
+.sidebar-link {
+  color: var(--sidebar-muted) !important;
+}
+
+.sidebar-link:hover {
+  background-color: var(--sidebar-hover) !important;
+  color: var(--sidebar-text) !important;
+}
+
+.sidebar-link.is-active {
+  background-color: var(--sidebar-active-bg) !important;
+  color: var(--sidebar-active-text) !important;
+  font-weight: 600 !important;
+}
+
+.sidebar-footer {
+  background-color: var(--sidebar-header) !important;
+  border-color: var(--sidebar-border) !important;
+}
+
+.sidebar-avatar {
+  background-color: var(--sidebar-hover) !important;
+  color: var(--sidebar-text) !important;
+  border: 1px solid var(--sidebar-border) !important;
+}
+
+.sidebar-user-name {
+  color: var(--sidebar-text) !important;
+}
+
+/* =========================================================================
+   LEGAL & PUBLIC PAGES
+   ========================================================================= */
+.legal-page {
+  background-color: var(--page-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+.legal-page header {
+  background-color: var(--surface) !important;
+  border-color: var(--border) !important;
+}
+
+/* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -17,9 +509,9 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--border);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--text-muted);
 }

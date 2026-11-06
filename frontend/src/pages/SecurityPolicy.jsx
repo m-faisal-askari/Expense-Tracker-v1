@@ -11,12 +11,13 @@ import {
   Key,
   HardDrive
 } from 'lucide-react';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export function SecurityPolicy() {
   const lastUpdated = "November 6, 2026";
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200">
+    <div className="legal-page min-h-screen bg-slate-950 text-slate-200">
       {/* Top Header Navigation */}
       <header className="border-b border-slate-800 bg-slate-900/60 backdrop-blur-md sticky top-0 z-30">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -26,7 +27,8 @@ export function SecurityPolicy() {
             </div>
             <span className="font-bold text-base tracking-tight">FreelanceFinance</span>
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <ThemeToggle className="border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white" />
             <Link 
               to="/privacy" 
               className="text-xs text-slate-400 hover:text-white transition hidden sm:inline-block"
@@ -44,7 +46,7 @@ export function SecurityPolicy() {
       </header>
 
       {/* Hero Banner */}
-      <div className="relative py-12 border-b border-slate-800/80 bg-gradient-to-b from-indigo-950/20 to-transparent">
+      <div className="relative py-12 border-b border-slate-800/80">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium mb-4">
             <ShieldCheck className="w-3.5 h-3.5" /> Military-Grade Ledger Integrity

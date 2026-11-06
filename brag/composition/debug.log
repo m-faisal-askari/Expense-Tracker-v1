@@ -1,0 +1,5 @@
+[1106/085905.933:ERROR:ui\gl\direct_composition_support.cc:625] AMD VideoProcessorGetOutputExtension failed: Unspecified error (0x80004005)
+[1106/085906.023:WARNING:net\dns\dns_config_service_win.cc:609] Failed to read DnsConfig.
+[1106/085910.873:ERROR:ui\gl\direct_composition_support.cc:625] AMD VideoProcessorGetOutputExtension failed: Unspecified error (0x80004005)
+[1106/085910.930:WARNING:net\dns\dns_config_service_win.cc:609] Failed to read DnsConfig.
+[1106/085916.008:WARNING:net\dns\dns_config_service_win.cc:609] Failed to read DnsConfig.
