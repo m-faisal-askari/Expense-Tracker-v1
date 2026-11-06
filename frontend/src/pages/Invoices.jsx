@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { Plus, Download, DollarSign, Ban, Trash2, Calendar, FileText, Edit3 } from 'lucide-react';
 import { api } from '../api/client';
 import { Modal } from '../components/Modal';
+import { FieldHint } from '../components/FieldHints';
 import { Badge } from '../components/Badge';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { EmptyState } from '../components/EmptyState';
@@ -468,12 +469,18 @@ export function Invoices() {
               </button>
             </div>
 
+            <div className="mb-1 flex items-center gap-2 px-1 text-[9px] font-semibold text-slate-500">
+              <span className="flex min-w-0 flex-1 items-center gap-1">Line description<FieldHint label="Line item description" compact /></span>
+              <span className="flex w-16 items-center justify-end gap-1">Qty<FieldHint label="Quantity" compact /></span>
+              <span className="flex w-28 items-center justify-end gap-1">Rate<FieldHint label="Unit rate" compact /></span>
+            </div>
             <div className="space-y-2">
               {form.items.map((item, idx) => (
                 <div key={idx} className="flex gap-2 items-center">
                   <input
                     type="text"
                     required
+                    aria-label="Line item description"
                     placeholder="Item description"
                     value={item.description}
                     onChange={(e) => updateItem(idx, 'description', e.target.value)}
@@ -483,6 +490,7 @@ export function Invoices() {
                     type="number"
                     step="0.1"
                     required
+                    aria-label="Quantity"
                     placeholder="Qty"
                     value={item.quantity}
                     onChange={(e) => updateItem(idx, 'quantity', e.target.value)}
@@ -492,6 +500,7 @@ export function Invoices() {
                     type="number"
                     step="0.01"
                     required
+                    aria-label="Rate per unit"
                     placeholder="Rate"
                     value={item.unit_price}
                     onChange={(e) => updateItem(idx, 'unit_price', e.target.value)}
@@ -617,12 +626,18 @@ export function Invoices() {
               </button>
             </div>
 
+            <div className="mb-1 flex items-center gap-2 px-1 text-[9px] font-semibold text-slate-500">
+              <span className="flex min-w-0 flex-1 items-center gap-1">Line description<FieldHint label="Line item description" compact /></span>
+              <span className="flex w-16 items-center justify-end gap-1">Qty<FieldHint label="Quantity" compact /></span>
+              <span className="flex w-28 items-center justify-end gap-1">Rate<FieldHint label="Unit rate" compact /></span>
+            </div>
             <div className="space-y-2">
               {form.items.map((item, idx) => (
                 <div key={idx} className="flex gap-2 items-center">
                   <input
                     type="text"
                     required
+                    aria-label="Line item description"
                     placeholder="Description"
                     value={item.description}
                     onChange={(e) => updateItem(idx, 'description', e.target.value)}
@@ -632,6 +647,7 @@ export function Invoices() {
                     type="number"
                     step="0.1"
                     required
+                    aria-label="Quantity"
                     placeholder="Qty"
                     value={item.quantity}
                     onChange={(e) => updateItem(idx, 'quantity', e.target.value)}
@@ -641,6 +657,7 @@ export function Invoices() {
                     type="number"
                     step="0.01"
                     required
+                    aria-label="Rate per unit"
                     placeholder="Rate"
                     value={item.unit_price}
                     onChange={(e) => updateItem(idx, 'unit_price', e.target.value)}

@@ -16,6 +16,7 @@ import { Savings } from './pages/Savings';
 import { Reports } from './pages/Reports';
 import { Settings } from './pages/Settings';
 import { LoginPage } from './pages/LoginPage';
+import { LandingPage } from './pages/LandingPage';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfService } from './pages/TermsOfService';
 import { SecurityPolicy } from './pages/SecurityPolicy';
@@ -60,7 +61,12 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       ) : (
-        <Route path="*" element={<LoginPage />} />
+        <>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage initialTab="login" />} />
+          <Route path="/signup" element={<LoginPage initialTab="register" />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </>
       )}
     </Routes>
   );

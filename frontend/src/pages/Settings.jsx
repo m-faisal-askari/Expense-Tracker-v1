@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Save, User, Globe, Shield, CheckCircle2, FileText, Scale, Lock, ExternalLink } from 'lucide-react';
 import { api } from '../api/client';
 import { useAuth } from '../contexts/AuthContext';
+import { FieldHints } from '../components/FieldHints';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 
 export function Settings() {
@@ -90,6 +91,7 @@ export function Settings() {
         </div>
       )}
 
+      <FieldHints>
       <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200/80 p-6 shadow-xs space-y-6 text-xs">
         {/* Personal Details */}
         <div className="space-y-4">
@@ -210,6 +212,7 @@ export function Settings() {
           </button>
         </div>
       </form>
+      </FieldHints>
 
       {/* Legal & Compliance Section */}
       <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">

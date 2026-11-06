@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
-import { ShieldCheck, Mail, Lock, User, ArrowRight, DollarSign, TrendingUp, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Mail, Lock, User, ArrowLeft, ArrowRight, DollarSign, TrendingUp, CheckCircle2 } from 'lucide-react';
 import { ThemeToggle } from '../components/ThemeToggle';
+import { FieldHints } from '../components/FieldHints';
 
-export function LoginPage() {
+export function LoginPage({ initialTab = 'login' }) {
   const { login, register, loginWithGoogle } = useAuth();
   const { showError, showSuccess } = useToast();
-  const [tab, setTab] = useState('login'); // 'login' | 'register'
+  const [tab, setTab] = useState(initialTab); // 'login' | 'register'
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
 
@@ -17,6 +18,10 @@ export function LoginPage() {
     password: '',
     full_name: ''
   });
+
+  useEffect(() => {
+    setTab(initialTab);
+  }, [initialTab]);
 
   const handleEmailAuth = async (e) => {
     e.preventDefault();
@@ -52,6 +57,9 @@ export function LoginPage() {
 
   return (
     <div className="login-page min-h-screen bg-slate-50 text-slate-800 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
+      <Link to="/" className="absolute left-4 top-4 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 transition hover:text-slate-900 sm:left-6 sm:top-6">
+        <ArrowLeft className="h-3.5 w-3.5" /> Back to home
+      </Link>
       <ThemeToggle className="absolute right-4 top-4 sm:right-6 sm:top-6" />
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
@@ -132,6 +140,7 @@ export function LoginPage() {
           </div>
 
           {/* Email / Password Form */}
+          <FieldHints>
           <form onSubmit={handleEmailAuth} className="space-y-4 text-xs">
             {tab === 'register' && (
               <div>
@@ -190,7 +199,7 @@ export function LoginPage() {
               ) : tab === 'login' ? (
                 <>Sign In <ArrowRight className="w-3.5 h-3.5" /></>
               ) : (
-                <>Create Clean Account <ArrowRight className="w-3.5 h-3.5" /></>
+                <>Create account <ArrowRight className="w-3.5 h-3.5" /></>
               )}
             </button>
 
@@ -201,16 +210,17 @@ export function LoginPage() {
               <Link to="/privacy" className="text-indigo-600 hover:underline">Privacy Policy</Link>.
             </p>
           </form>
+          </FieldHints>
 
           {/* Features note */}
           <div className="mt-6 pt-5 border-t border-slate-100 text-[11px] text-slate-500 space-y-1.5">
             <div className="flex items-center gap-2 text-slate-600">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-              <span>Independent clean tenant isolation (no demo sample data)</span>
+              <span>Clients, projects, invoices, and payments in one view</span>
             </div>
             <div className="flex items-center gap-2 text-slate-600">
               <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600" />
-              <span>Automatic real-time multi-currency calculations</span>
+              <span>Cash flow, tax reserves, and multi-currency tracking</span>
             </div>
           </div>
         </div>

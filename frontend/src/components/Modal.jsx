@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
+import { FieldHints } from './FieldHints';
 
 export function Modal({ isOpen, onClose, title, children, maxWidth = 'max-w-xl' }) {
   useEffect(() => {
@@ -28,7 +29,7 @@ export function Modal({ isOpen, onClose, title, children, maxWidth = 'max-w-xl' 
           </button>
         </div>
         <div className="p-6 max-h-[80vh] overflow-y-auto">
-          {children}
+          <FieldHints>{children}</FieldHints>
         </div>
       </div>
     </div>
