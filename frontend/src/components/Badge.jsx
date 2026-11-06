@@ -13,7 +13,7 @@ export function Badge({ status, label }) {
   } else if (['OVERDUE', 'CANCELLED', 'ARCHIVED'].includes(s)) {
     styles = 'bg-rose-50 text-rose-700 border-rose-200';
   } else if (['SENT', 'DRAFT'].includes(s)) {
-    styles = 'bg-blue-50 text-blue-700 border-blue-200';
+    styles = 'bg-slate-100 text-slate-700 border-slate-200';
   }
 
   return (

@@ -171,7 +171,7 @@ export function Subscriptions() {
           amount={annualCost}
           currency={defaultCurrency}
           icon={DollarSign}
-          color="purple"
+          color="stone"
           subtitle={`Annualized software & services in ${defaultCurrency}`}
         />
       </div>

@@ -17,7 +17,15 @@ import { formatCurrency, formatDate } from '../utils/formatters';
 import { useCurrency } from '../contexts/CurrencyContext';
 import { Link } from 'react-router-dom';
 
-const CATEGORY_COLORS = ['#6366f1', '#06b6d4', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#64748b'];
+const CATEGORY_COLORS = [
+  'var(--chart-category-1)',
+  'var(--chart-category-2)',
+  'var(--chart-category-3)',
+  'var(--chart-category-4)',
+  'var(--chart-category-5)',
+  'var(--chart-category-6)',
+  'var(--chart-category-7)',
+];
 
 export function Dashboard() {
   const [period, setPeriod] = useState('this_month');
@@ -145,7 +153,7 @@ export function Dashboard() {
           amount={s.total_account_balance}
           currency={activeCurrency}
           icon={Wallet}
-          color="blue"
+          color="emerald"
           subtitle="Liquid cash across all active accounts"
         />
         <MetricCard
@@ -161,7 +169,7 @@ export function Dashboard() {
           amount={s.estimated_tax_reserve}
           currency={activeCurrency}
           icon={ShieldAlert}
-          color="purple"
+          color="stone"
           subtitle="Target reserve based on net profit"
         />
       </div>
@@ -179,30 +187,20 @@ export function Dashboard() {
           <div className="h-64 sm:h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={charts?.monthly_trends || []} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-                <defs>
-                  <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.2}/>
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
-                  </linearGradient>
-                  <linearGradient id="colorExpense" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#ef4444" stopOpacity={0.2}/>
-                    <stop offset="95%" stopColor="#ef4444" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#64748b' }} axisLine={false} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--chart-grid)" />
+                <XAxis dataKey="month" tick={{ fontSize: 11, fill: 'var(--chart-label)' }} axisLine={false} tickLine={false} />
                 <YAxis 
-                  tick={{ fontSize: 11, fill: '#64748b' }} 
+                  tick={{ fontSize: 11, fill: 'var(--chart-label)' }}
                   axisLine={false} 
                   tickLine={false}
                   tickFormatter={(val) => formatCurrency(val, activeCurrency)}
                 />
                 <Tooltip 
                   formatter={(val) => formatCurrency(val, activeCurrency)} 
-                  contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px', color: '#fff', fontSize: '12px' }} 
+                  contentStyle={{ backgroundColor: 'var(--chart-tooltip)', border: '1px solid var(--chart-grid)', borderRadius: '8px', color: 'var(--chart-tooltip-text)', fontSize: '12px' }}
                 />
-                <Area type="monotone" dataKey="income" name="Income" stroke="#10b981" strokeWidth={2} fillOpacity={1} fill="url(#colorIncome)" />
-                <Area type="monotone" dataKey="expenses" name="Expenses" stroke="#ef4444" strokeWidth={2} fillOpacity={1} fill="url(#colorExpense)" />
+                <Area type="monotone" dataKey="income" name="Income" stroke="var(--chart-income)" strokeWidth={2} fill="var(--chart-income-fill)" fillOpacity={0.35} />
+                <Area type="monotone" dataKey="expenses" name="Expenses" stroke="var(--chart-expense)" strokeWidth={2} fill="var(--chart-expense-fill)" fillOpacity={0.3} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -313,7 +311,7 @@ export function Dashboard() {
                 <div key={tx.id} className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50/70 border border-slate-100 text-xs">
                   <div className="flex items-center gap-3">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                      tx.type === 'INCOME' ? 'bg-emerald-100 text-emerald-700' : (tx.type === 'EXPENSE' ? 'bg-rose-100 text-rose-700' : 'bg-blue-100 text-blue-700')
+                      tx.type === 'INCOME' ? 'bg-emerald-100 text-emerald-700' : (tx.type === 'EXPENSE' ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-700')
                     }`}>
                       {tx.type === 'INCOME' ? <ArrowDownRight className="w-4 h-4" /> : <ArrowUpRight className="w-4 h-4" />}
                     </div>
@@ -325,7 +323,7 @@ export function Dashboard() {
 
                   <div className="text-right">
                     <p className={`font-bold ${
-                      tx.type === 'INCOME' ? 'text-emerald-600' : (tx.type === 'EXPENSE' ? 'text-slate-900' : 'text-blue-600')
+                      tx.type === 'INCOME' ? 'text-emerald-600' : (tx.type === 'EXPENSE' ? 'text-slate-900' : 'text-slate-600')
                     }`}>
                       {tx.type === 'INCOME' ? '+' : (tx.type === 'EXPENSE' ? '-' : '')}
                       {formatCurrency(tx.amount, tx.currency)}

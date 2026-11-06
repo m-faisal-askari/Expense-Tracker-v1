@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useCurrency } from '../contexts/CurrencyContext';
 import { AuthModal } from './AuthModal';
+import { ThemeToggle } from './ThemeToggle';
 
 export function Navbar({ onOpenSidebar }) {
   const navigate = useNavigate();
@@ -64,6 +65,8 @@ export function Navbar({ onOpenSidebar }) {
             <Plus className="w-3.5 h-3.5" />
             Add Transaction
           </button>
+
+          <ThemeToggle className="p-1.5" />
 
           <div className="h-4 w-px bg-slate-200 mx-1" />
 

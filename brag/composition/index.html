@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Freelancer Finance — Brag Film</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --ground: #f8fafc;
+        --ink: #0f172a;
+        --body: #1e293b;
+        --muted: #627289;
+        --line: #e2e8f0;
+        --indigo: #4f46e5;
+        --indigo-soft: #eef2ff;
+        --green: #059669;
+        --green-soft: #ecfdf5;
+        --rose: #e11d48;
+        --rose-soft: #fff1f2;
+        --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--ground);
+        color: var(--body);
+        font-family: var(--font);
+        -webkit-font-smoothing: antialiased;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--ground);
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--ground);
+      }
+      .scene::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 52% 42%, #ffffff 0%, #f8fafc 72%);
+        pointer-events: none;
+      }
+      .brand-lockup {
+        position: absolute;
+        top: 54px;
+        left: 82px;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        color: var(--ink);
+        font-size: 20px;
+        font-weight: 720;
+        letter-spacing: -0.04em;
+        z-index: 3;
+      }
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        border-radius: 11px;
+        color: #fff;
+        background: var(--indigo);
+        font-size: 18px;
+        font-weight: 750;
+        letter-spacing: -0.06em;
+        box-shadow: 0 5px 14px rgba(79, 70, 229, .18);
+      }
+      .eyebrow {
+        color: var(--muted);
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+      }
+      .hero-main {
+        position: absolute;
+        left: 175px;
+        top: 230px;
+        width: 1570px;
+      }
+      .hero-title {
+        margin-top: 28px;
+        max-width: 1500px;
+        color: var(--ink);
+        font-size: 94px;
+        line-height: 1.08;
+        font-weight: 660;
+        letter-spacing: -.065em;
+      }
+      .hero-title .neq { color: var(--indigo); padding: 0 18px; }
+      .hero-rule {
+        width: 930px;
+        height: 4px;
+        margin-top: 42px;
+        background: linear-gradient(90deg, var(--indigo), #a5b4fc 72%, rgba(165,180,252,0));
+        transform-origin: left center;
+      }
+      .hero-note {
+        margin-top: 29px;
+        color: var(--muted);
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .hero-pills { display: flex; gap: 18px; margin-top: 64px; }
+      .hero-pill {
+        min-width: 350px;
+        padding: 24px 28px;
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        background: #fff;
+        box-shadow: 0 12px 36px rgba(15, 23, 42, .035);
+      }
+      .hero-pill .pill-label { color: var(--muted); font-size: 16px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+      .hero-pill .pill-value { margin-top: 10px; color: var(--ink); font-size: 30px; font-weight: 650; }
+      .hero-pill .pill-status { margin-left: 9px; color: var(--indigo); font-size: 18px; font-weight: 700; }
+
+      .browser {
+        position: absolute;
+        left: 168px;
+        top: 128px;
+        width: 1584px;
+        height: 782px;
+        overflow: hidden;
+        border: 1px solid #dbe3ed;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 0 28px 85px rgba(15, 23, 42, .12), 0 3px 10px rgba(15, 23, 42, .05);
+      }
+      .browser-bar {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        padding: 0 22px;
+        border-bottom: 1px solid var(--line);
+        background: #fff;
+      }
+      .window-dots { display: flex; gap: 8px; }
+      .window-dots i { width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1; }
+      .address { margin: 0 auto; padding: 6px 90px; border-radius: 8px; background: #f8fafc; color: var(--muted); font-size: 13px; letter-spacing: .02em; }
+      .app-shell { height: calc(100% - 48px); display: flex; background: #f8fafc; }
+      .sidebar {
+        width: 248px;
+        flex: none;
+        padding: 24px 17px;
+        border-right: 1px solid var(--line);
+        background: #fff;
+      }
+      .side-brand { display: flex; align-items: center; gap: 10px; padding: 2px 9px 29px; color: var(--ink); font-size: 17px; font-weight: 720; letter-spacing: -.04em; }
+      .side-brand .brand-mark { width: 30px; height: 30px; border-radius: 9px; font-size: 16px; }
+      .nav-label { padding: 9px 12px 8px; color: #627289; font-size: 14px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+      .nav-item { display: flex; align-items: center; gap: 12px; margin: 3px 0; padding: 11px 12px; border-radius: 9px; color: #475569; font-size: 16px; font-weight: 550; }
+      .nav-item.active { color: #3730a3; background: #eef2ff; font-weight: 700; }
+      .nav-icon { width: 16px; height: 16px; position: relative; display: inline-block; border: 1.8px solid currentColor; border-radius: 4px; opacity: .85; }
+      .nav-icon.round { border-radius: 50%; }
+      .nav-icon.lines::before,.nav-icon.lines::after { content: ""; position: absolute; left: 3px; right: 3px; height: 1.6px; background: currentColor; }
+      .nav-icon.lines::before { top: 4px; } .nav-icon.lines::after { top: 9px; }
+      .app-main { position: relative; flex: 1; min-width: 0; padding: 31px 36px; background: #f8fafc; }
+      .page-head { display: flex; align-items: flex-start; justify-content: space-between; }
+      .page-title { color: var(--ink); font-size: 26px; line-height: 1.1; font-weight: 700; letter-spacing: -.04em; }
+      .page-subtitle { margin-top: 8px; color: var(--muted); font-size: 14px; }
+      .head-controls { display: flex; gap: 10px; align-items: center; }
+      .select-chip { display: inline-flex; align-items: center; gap: 7px; padding: 9px 12px; border: 1px solid #dbe3ed; border-radius: 9px; background: #fff; color: #334155; font-size: 13px; font-weight: 650; }
+      .select-chip .caret { color: var(--muted); font-size: 11px; }
+      .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 27px; }
+      .metric-card { min-height: 132px; padding: 18px 18px 16px; border: 1px solid #e2e8f0; border-radius: 13px; background: #fff; box-shadow: 0 2px 5px rgba(15,23,42,.025); }
+      .metric-label { color: var(--muted); font-size: 14px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+      .metric-value { margin-top: 17px; color: var(--ink); font-size: 27px; font-weight: 720; letter-spacing: -.045em; }
+      .metric-note { margin-top: 5px; color: var(--muted); font-size: 13px; }
+      .metric-value.green { color: var(--green); }
+      .metric-value.indigo { color: #4338ca; }
+      .content-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 17px; margin-top: 18px; }
+      .panel { border: 1px solid #e2e8f0; border-radius: 13px; background: #fff; box-shadow: 0 2px 5px rgba(15,23,42,.025); }
+      .panel-head { display: flex; justify-content: space-between; align-items: flex-start; padding: 18px 20px 12px; }
+      .panel-title { color: var(--ink); font-size: 15px; font-weight: 700; }
+      .panel-subtitle { margin-top: 6px; color: var(--muted); font-size: 12px; }
+      .chart-wrap { height: 252px; padding: 5px 14px 14px; }
+      .chart-svg { display: block; width: 100%; height: calc(100% - 26px); overflow: visible; }
+      .gridline { stroke: #e8edf4; stroke-width: 1.3; }
+      .income-area { fill: url(#incomeFill); }
+      .expense-area { fill: url(#expenseFill); }
+      .income-line { fill: none; stroke: #10b981; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .expense-line { fill: none; stroke: #ef4444; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .chart-labels { display: flex; justify-content: space-between; padding: 0 19px; color: var(--muted); font-size: 13px; }
+      .invoice-row { display: flex; align-items: center; justify-content: space-between; padding: 15px 17px; border-top: 1px solid #f1f5f9; }
+      .invoice-row:first-of-type { border-top: 0; }
+      .invoice-main { color: var(--ink); font-size: 13px; font-weight: 650; }
+      .invoice-sub { margin-top: 5px; color: var(--muted); font-size: 13px; }
+      .invoice-amount { color: var(--ink); font-size: 14px; font-weight: 700; text-align: right; }
+      .status { display: inline-flex; align-items: center; margin-top: 5px; padding: 4px 7px; border-radius: 20px; background: #fff7ed; color: #9a3412; font-size: 12px; font-weight: 750; letter-spacing: .04em; }
+      .demo-tag { position: absolute; right: 31px; bottom: 20px; padding: 5px 8px; border: 1px solid #cbd5e1; border-radius: 5px; color: #475569; background: #fff; font-size: 12px; font-weight: 700; letter-spacing: .1em; }
+      .caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 78px;
+        text-align: center;
+        color: var(--ink);
+        font-size: 29px;
+        font-weight: 610;
+        letter-spacing: -.035em;
+      }
+      .modal-backdrop { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(15, 23, 42, .22); }
+      .payment-modal { width: 720px; padding: 29px 31px 25px; border: 1px solid #e2e8f0; border-radius: 17px; background: #fff; box-shadow: 0 30px 90px rgba(15,23,42,.19); }
+      .modal-top { display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid #eef2f7; }
+      .modal-title { color: var(--ink); font-size: 22px; font-weight: 700; letter-spacing: -.035em; }
+      .modal-hint { margin-top: 7px; color: var(--muted); font-size: 13px; }
+      .close-x { width: 29px; height: 29px; display: grid; place-items: center; border-radius: 8px; color: var(--muted); background: #f8fafc; font-size: 20px; }
+      .invoice-summary { display: flex; justify-content: space-between; align-items: center; margin: 18px 0; padding: 15px 17px; border: 1px solid #e2e8f0; border-radius: 10px; background: #f8fafc; }
+      .invoice-summary .inv-no { color: var(--ink); font-size: 14px; font-weight: 700; }
+      .invoice-summary .inv-client { margin-top: 4px; color: var(--muted); font-size: 12px; }
+      .invoice-summary .balance { color: var(--ink); font-size: 21px; font-weight: 720; }
+      .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .field-label { display: block; margin-bottom: 7px; color: #334155; font-size: 12px; font-weight: 650; }
+      .field { padding: 12px 13px; border: 1px solid #cbd5e1; border-radius: 8px; color: var(--ink); background: #fff; font-size: 14px; font-weight: 650; }
+      .field.wide { grid-column: 1 / -1; }
+      .confirm-button { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 18px; padding: 13px 17px; border-radius: 9px; color: #fff; background: var(--green); font-size: 14px; font-weight: 700; }
+      .check { width: 17px; height: 17px; display: grid; place-items: center; border-radius: 50%; color: var(--green); background: #fff; font-size: 12px; font-weight: 900; }
+      .success-row { display: flex; align-items: center; justify-content: space-between; margin-top: 15px; padding: 14px 16px; border: 1px solid #a7f3d0; border-radius: 10px; background: #ecfdf5; }
+      .success-left { display: flex; align-items: center; gap: 10px; color: #065f46; font-size: 14px; font-weight: 700; }
+      .success-right { color: #047857; font-size: 16px; font-weight: 750; }
+      .paid-status { display: inline-flex; padding: 5px 9px; border-radius: 20px; background: #d1fae5; color: #065f46; font-size: 11px; font-weight: 750; letter-spacing: .07em; }
+      .flow-note { margin-top: 15px; color: var(--muted); font-size: 12px; text-align: center; }
+
+      .dashboard-banner { position: absolute; left: 0; right: 0; bottom: 76px; display: flex; justify-content: center; }
+      .banner-pill { display: flex; align-items: center; gap: 12px; padding: 13px 18px; border: 1px solid #dbe3ed; border-radius: 30px; color: #334155; background: rgba(255,255,255,.94); box-shadow: 0 7px 24px rgba(15,23,42,.07); font-size: 15px; font-weight: 650; }
+      .banner-dot { width: 9px; height: 9px; border-radius: 50%; background: #10b981; }
+      .detail-stage { position: absolute; left: 190px; right: 190px; top: 183px; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+      .skeleton-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; margin-top: 30px; }
+      .skeleton-card { height: 132px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 13px; background: #fff; }
+      .skeleton-bar { height: 12px; margin-bottom: 16px; border-radius: 7px; background: #e2e8f0; }
+      .skeleton-bar.wide { width: 58%; }
+      .skeleton-bar.short { width: 34%; height: 24px; background: #c7d2fe; }
+      .detail-card { min-height: 435px; padding: 35px; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: 0 18px 52px rgba(15,23,42,.075); }
+      .detail-top { display: flex; align-items: center; justify-content: space-between; }
+      .detail-icon { width: 51px; height: 51px; display: grid; place-items: center; border: 1px solid #c7d2fe; border-radius: 14px; color: var(--indigo); background: var(--indigo-soft); font-size: 18px; font-weight: 750; }
+      .detail-label { margin-top: 27px; color: var(--muted); font-size: 15px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+      .detail-title { margin-top: 12px; color: var(--ink); font-size: 34px; font-weight: 700; letter-spacing: -.05em; }
+      .detail-copy { max-width: 540px; margin-top: 13px; color: #475569; font-size: 19px; line-height: 1.5; }
+      .currency-pair { display: flex; align-items: center; gap: 18px; margin-top: 48px; }
+      .currency-chip { min-width: 160px; padding: 18px 19px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); background: #fff; font-size: 25px; font-weight: 700; text-align: center; }
+      .pair-arrow { color: var(--indigo); font-size: 26px; font-weight: 500; }
+      .saved-note { display: flex; align-items: center; gap: 9px; margin-top: 19px; color: #334155; font-size: 15px; font-weight: 600; }
+      .saved-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+      .reserve-gauge { display: flex; align-items: center; gap: 24px; margin-top: 44px; }
+      .gauge-ring { width: 110px; height: 110px; display: grid; place-items: center; border: 10px solid #e0e7ff; border-top-color: var(--indigo); border-right-color: var(--indigo); border-radius: 50%; color: var(--indigo); font-size: 16px; font-weight: 750; transform: rotate(-45deg); }
+      .gauge-ring span { transform: rotate(45deg); }
+      .gauge-copy { color: #334155; font-size: 16px; line-height: 1.55; }
+      .reserve-note { margin-top: 22px; padding: 14px 16px; border-radius: 10px; color: #3730a3; background: #eef2ff; font-size: 14px; font-weight: 650; }
+      .outro {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 292px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .outro-mark { width: 72px; height: 72px; border-radius: 22px; font-size: 34px; }
+      .outro-name { margin-top: 28px; color: var(--ink); font-size: 71px; font-weight: 680; letter-spacing: -.065em; }
+      .outro-line { margin-top: 16px; color: #475569; font-size: 25px; font-weight: 500; letter-spacing: -.02em; }
+      .outro-rule { width: 120px; height: 3px; margin-top: 39px; border-radius: 5px; background: var(--indigo); }
+      .footer-mark { position: absolute; left: 0; right: 0; bottom: 60px; text-align: center; color: var(--muted); font-size: 13px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-enpg" id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1920" data-height="1080" data-fps="30">
+      <section data-hf-id="hf-oi95" id="scene1" class="scene clip" data-start="0" data-duration="2.4" data-track-index="0">
+        <div data-hf-id="hf-umee" class="brand-lockup"><span data-hf-id="hf-plqw" class="brand-mark">F</span><span data-hf-id="hf-yeuu">Freelancer Finance</span></div>
+        <div data-hf-id="hf-22uy" id="hero-copy" class="hero-main">
+          <div data-hf-id="hf-ij40" class="eyebrow">The ledger rule that matters</div>
+          <div data-hf-id="hf-1jet" class="hero-title">Invoice issued<span data-hf-id="hf-nil5" class="neq">≠</span><br data-hf-id="hf-x5px" />cash received</div>
+          <div data-hf-id="hf-h31o" id="hero-rule" class="hero-rule"></div>
+          <div data-hf-id="hf-rlsy" class="hero-note">Clear books begin with the right distinction.</div>
+          <div data-hf-id="hf-xwyf" class="hero-pills">
+            <div data-hf-id="hf-m2v4" id="sent-pill" class="hero-pill"><div data-hf-id="hf-sbe8" class="pill-label">Invoice #2408</div><div data-hf-id="hf-vl71" class="pill-value">$4,800 <span data-hf-id="hf-0ui9" class="pill-status">SENT</span></div></div>
+            <div data-hf-id="hf-wxj1" id="cash-pill" class="hero-pill"><div data-hf-id="hf-bm2h" class="pill-label">Net cash received</div><div data-hf-id="hf-qr63" class="pill-value">Not yet posted</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-v35n" id="scene2" class="scene clip" data-start="2.4" data-duration="3.1" data-track-index="1">
+        <div data-hf-id="hf-8x1h" class="browser" id="receivable-window">
+          <div data-hf-id="hf-80ig" class="browser-bar"><div data-hf-id="hf-hvbh" class="window-dots"><i data-hf-id="hf-wt6k"></i><i data-hf-id="hf-zeb8"></i><i data-hf-id="hf-y7e5"></i></div><div data-hf-id="hf-wlao" class="address">Freelancer Finance · Financial Overview</div></div>
+          <div data-hf-id="hf-4acs" class="app-shell">
+            <aside data-hf-id="hf-842t" class="sidebar">
+              <div data-hf-id="hf-astu" class="side-brand"><span data-hf-id="hf-dui8" class="brand-mark">F</span>Freelancer Finance</div>
+              <div data-hf-id="hf-410z" class="nav-label">Workspace</div>
+              <div data-hf-id="hf-5flm" class="nav-item active"><span data-hf-id="hf-jktu" class="nav-icon"></span>Overview</div>
+              <div data-hf-id="hf-wd6g" class="nav-item"><span data-hf-id="hf-vhhn" class="nav-icon lines"></span>Transactions</div>
+              <div data-hf-id="hf-l89y" class="nav-item"><span data-hf-id="hf-3dmm" class="nav-icon round"></span>Income</div>
+              <div data-hf-id="hf-rw6c" class="nav-item"><span data-hf-id="hf-d4hi" class="nav-icon"></span>Expenses</div>
+              <div data-hf-id="hf-pjr9" class="nav-item"><span data-hf-id="hf-disj" class="nav-icon"></span>Accounts</div>
+              <div data-hf-id="hf-gj5y" class="nav-label" style="margin-top:17px">Business</div>
+              <div data-hf-id="hf-caov" class="nav-item"><span data-hf-id="hf-dx3k" class="nav-icon"></span>Clients</div>
+              <div data-hf-id="hf-r00v" class="nav-item"><span data-hf-id="hf-b4yd" class="nav-icon"></span>Projects</div>
+              <div data-hf-id="hf-bndt" class="nav-item"><span data-hf-id="hf-lgob" class="nav-icon lines"></span>Invoices</div>
+              <div data-hf-id="hf-c1gi" class="nav-item"><span data-hf-id="hf-bj9e" class="nav-icon"></span>Taxes</div>
+            </aside>
+            <main data-hf-id="hf-ws89" class="app-main">
+              <div data-hf-id="hf-5o30" class="page-head">
+                <div data-hf-id="hf-yeow"><div data-hf-id="hf-6jw6" class="page-title">Financial Overview</div><div data-hf-id="hf-4say" class="page-subtitle">Live authoritative ledger figures for your freelance business</div></div>
+                <div data-hf-id="hf-kftp" class="head-controls"><div data-hf-id="hf-qm3l" class="select-chip">USD <span data-hf-id="hf-4r0k" class="caret">▾</span></div><div data-hf-id="hf-nap1" class="select-chip">This Month <span data-hf-id="hf-ng1o" class="caret">▾</span></div></div>
+              </div>
+              <div data-hf-id="hf-3t5p" class="metric-grid">
+                <div data-hf-id="hf-swxr" class="metric-card"><div data-hf-id="hf-lpw2" class="metric-label">Net Cash Received</div><div data-hf-id="hf-51qd" class="metric-value green">$12,850.00</div><div data-hf-id="hf-qo9l" class="metric-note">Confirmed payments only</div></div>
+                <div data-hf-id="hf-djun" class="metric-card"><div data-hf-id="hf-5eva" class="metric-label">Total Expenses</div><div data-hf-id="hf-s86w" class="metric-value">$4,600.00</div><div data-hf-id="hf-eywa" class="metric-note">Recorded outflows</div></div>
+                <div data-hf-id="hf-d5jm" class="metric-card"><div data-hf-id="hf-cqph" class="metric-label">Net Cash Flow</div><div data-hf-id="hf-uml9" class="metric-value indigo">$8,250.00</div><div data-hf-id="hf-88go" class="metric-note">Inflows minus outflows</div></div>
+                <div data-hf-id="hf-cr8l" class="metric-card"><div data-hf-id="hf-irnp" class="metric-label">Outstanding Invoices</div><div data-hf-id="hf-6v1a" class="metric-value">$4,800.00</div><div data-hf-id="hf-s2si" class="metric-note">Unpaid issued receivables</div></div>
+              </div>
+              <div data-hf-id="hf-faxc" class="content-grid">
+                <div data-hf-id="hf-owjm" class="panel"><div data-hf-id="hf-95fx" class="panel-head"><div data-hf-id="hf-y7yw"><div data-hf-id="hf-6wg4" class="panel-title">Income vs Expenses (6 Months)</div><div data-hf-id="hf-n9nv" class="panel-subtitle">Historical monthly movements in USD</div></div><div data-hf-id="hf-mnmu" class="select-chip">6 months <span data-hf-id="hf-m94l" class="caret">▾</span></div></div><div data-hf-id="hf-36xh" class="chart-wrap"><svg data-hf-id="hf-e5o9" class="chart-svg" viewBox="0 0 780 235" aria-label="Demo income and expense trend"><defs data-hf-id="hf-mh0t"><linearGradient data-hf-id="hf-17p4" id="incomeFill" x1="0" y1="0" x2="0" y2="1"><stop data-hf-id="hf-flhv" offset="0" stop-color="#10b981" stop-opacity=".18"/><stop data-hf-id="hf-i66j" offset="1" stop-color="#10b981" stop-opacity="0"/></linearGradient><linearGradient data-hf-id="hf-o5vr" id="expenseFill" x1="0" y1="0" x2="0" y2="1"><stop data-hf-id="hf-aznc" offset="0" stop-color="#ef4444" stop-opacity=".13"/><stop data-hf-id="hf-vyxb" offset="1" stop-color="#ef4444" stop-opacity="0"/></linearGradient></defs><path data-hf-id="hf-a632" class="gridline" d="M25 35H755M25 92H755M25 149H755M25 206H755"/><path data-hf-id="hf-m00b" class="income-area" d="M25 170 C90 150 100 95 165 112 S250 126 305 73 S390 104 440 62 S535 83 590 43 S685 64 755 24 V210 H25Z"/><path data-hf-id="hf-wrtw" class="expense-area" d="M25 190 C88 184 110 162 165 175 S255 160 305 151 S390 169 440 135 S535 154 590 123 S690 140 755 105 V210 H25Z"/><path data-hf-id="hf-t9r2" class="income-line" d="M25 170 C90 150 100 95 165 112 S250 126 305 73 S390 104 440 62 S535 83 590 43 S685 64 755 24"/><path data-hf-id="hf-b3n7" class="expense-line" d="M25 190 C88 184 110 162 165 175 S255 160 305 151 S390 169 440 135 S535 154 590 123 S690 140 755 105"/></svg><div data-hf-id="hf-fh5g" class="chart-labels"><span data-hf-id="hf-laao">Jul</span><span data-hf-id="hf-yr20">Aug</span><span data-hf-id="hf-g4bf">Sep</span><span data-hf-id="hf-wo5p">Oct</span><span data-hf-id="hf-zhcw">Nov</span><span data-hf-id="hf-pgtz">Dec</span></div></div></div>
+                <div data-hf-id="hf-gxly" class="panel"><div data-hf-id="hf-uupt" class="panel-head"><div data-hf-id="hf-x11t"><div data-hf-id="hf-yhj0" class="panel-title">Upcoming Obligations</div><div data-hf-id="hf-g7li" class="panel-subtitle">Invoices due and subscription renewals</div></div></div><div data-hf-id="hf-rlre" class="invoice-row"><div data-hf-id="hf-xfcu"><div data-hf-id="hf-ri57" class="invoice-main">Invoice #2408</div><div data-hf-id="hf-wd3w" class="invoice-sub">Demo client · Due in 14 days</div></div><div data-hf-id="hf-w8fr"><div data-hf-id="hf-r4dc" class="invoice-amount">$4,800.00</div><div data-hf-id="hf-7m5w" class="status">SENT</div></div></div><div data-hf-id="hf-nz5a" class="invoice-row"><div data-hf-id="hf-wmqs"><div data-hf-id="hf-bjev" class="invoice-main">Outstanding balance</div><div data-hf-id="hf-skrt" class="invoice-sub">Unpaid receivable</div></div><div data-hf-id="hf-do7s" class="invoice-amount">$4,800.00</div></div></div>
+              </div>
+              <div data-hf-id="hf-v6vz" class="demo-tag">DEMO DATA</div>
+            </main>
+          </div>
+        </div>
+        <div data-hf-id="hf-fj45" id="receivable-caption" class="caption">Issued. Still a receivable.</div>
+      </section>
+
+      <section data-hf-id="hf-5pjr" id="scene3" class="scene clip" data-start="5.5" data-duration="3.5" data-track-index="2">
+        <div data-hf-id="hf-1ax9" class="browser" id="payment-window">
+          <div data-hf-id="hf-30mo" class="browser-bar"><div data-hf-id="hf-0v0h" class="window-dots"><i data-hf-id="hf-ylp6"></i><i data-hf-id="hf-0l8b"></i><i data-hf-id="hf-0zjc"></i></div><div data-hf-id="hf-3ame" class="address">Freelancer Finance · Invoice #2408</div></div>
+          <div data-hf-id="hf-kf0k" class="app-shell">
+            <aside data-hf-id="hf-cfzt" class="sidebar">
+              <div data-hf-id="hf-9hyu" class="side-brand"><span data-hf-id="hf-cnl5" class="brand-mark">F</span>Freelancer Finance</div>
+              <div data-hf-id="hf-axlf" class="nav-label">Workspace</div>
+              <div data-hf-id="hf-3ade" class="nav-item"><span data-hf-id="hf-bxkf" class="nav-icon"></span>Overview</div>
+              <div data-hf-id="hf-jamo" class="nav-item"><span data-hf-id="hf-l2da" class="nav-icon lines"></span>Transactions</div>
+              <div data-hf-id="hf-yv1m" class="nav-item"><span data-hf-id="hf-iisi" class="nav-icon round"></span>Income</div>
+              <div data-hf-id="hf-mqn0" class="nav-item"><span data-hf-id="hf-cbvg" class="nav-icon"></span>Expenses</div>
+              <div data-hf-id="hf-vdoq" class="nav-label" style="margin-top:17px">Business</div>
+              <div data-hf-id="hf-0rq7" class="nav-item"><span data-hf-id="hf-9jq9" class="nav-icon"></span>Projects</div>
+              <div data-hf-id="hf-oynt" class="nav-item active"><span data-hf-id="hf-ko29" class="nav-icon lines"></span>Invoices</div>
+              <div data-hf-id="hf-geo6" class="nav-item"><span data-hf-id="hf-9y1a" class="nav-icon"></span>Taxes</div>
+            </aside>
+            <main data-hf-id="hf-uw9p" class="app-main">
+              <div data-hf-id="hf-xtoq" class="skeleton-grid"><div data-hf-id="hf-je38" class="skeleton-card"><div data-hf-id="hf-4mc6" class="skeleton-bar wide"></div><div data-hf-id="hf-nijj" class="skeleton-bar short"></div><div data-hf-id="hf-bfn1" class="skeleton-bar" style="width:78%"></div></div><div data-hf-id="hf-r2uk" class="skeleton-card"><div data-hf-id="hf-ylfe" class="skeleton-bar wide"></div><div data-hf-id="hf-0u1r" class="skeleton-bar short"></div><div data-hf-id="hf-1w1r" class="skeleton-bar" style="width:65%"></div></div><div data-hf-id="hf-pvxh" class="skeleton-card"><div data-hf-id="hf-yzqf" class="skeleton-bar wide"></div><div data-hf-id="hf-0fqq" class="skeleton-bar short"></div><div data-hf-id="hf-wwd7" class="skeleton-bar" style="width:72%"></div></div></div>
+              <div data-hf-id="hf-r012" class="panel" style="margin-top:18px;height:390px;padding:23px"><div data-hf-id="hf-ze1g" class="skeleton-bar wide"></div><div data-hf-id="hf-y9j0" class="skeleton-bar" style="width:42%"></div><div data-hf-id="hf-hycb" class="skeleton-bar" style="width:88%;margin-top:42px"></div><div data-hf-id="hf-3jr4" class="skeleton-bar" style="width:82%"></div><div data-hf-id="hf-t70k" class="skeleton-bar" style="width:91%"></div></div>
+            </main>
+          </div>
+          <div data-hf-id="hf-hbxm" class="modal-backdrop">
+            <div data-hf-id="hf-mgqq" class="payment-modal" id="payment-modal">
+              <div data-hf-id="hf-15kl" class="modal-top"><div data-hf-id="hf-vftp"><div data-hf-id="hf-1wt6" class="modal-title">Record Payment for Invoice #2408</div><div data-hf-id="hf-d980" class="modal-hint">Payment settles the balance and posts income to the ledger.</div></div><div data-hf-id="hf-w1bw" class="close-x">×</div></div>
+              <div data-hf-id="hf-ddqq" class="invoice-summary"><div data-hf-id="hf-vu4q"><div data-hf-id="hf-1dvt" class="inv-no">Invoice #2408</div><div data-hf-id="hf-m9h6" class="inv-client">Demo client · USD</div></div><div data-hf-id="hf-m8k2" class="balance">$4,800.00</div></div>
+              <div data-hf-id="hf-br3g" id="payment-form">
+                <div data-hf-id="hf-i36f" class="form-grid"><div data-hf-id="hf-1043"><span data-hf-id="hf-8i6f" class="field-label">Payment Received</span><div data-hf-id="hf-8dci" class="field">$4,800.00</div></div><div data-hf-id="hf-1ef4"><span data-hf-id="hf-tvee" class="field-label">Platform / Fee Deducted</span><div data-hf-id="hf-ae5m" class="field">$0.00</div></div><div data-hf-id="hf-svsd" class="wide"><span data-hf-id="hf-qkvi" class="field-label">Deposit To Account</span><div data-hf-id="hf-g97y" class="field">Business Checking</div></div></div>
+                <div data-hf-id="hf-iqgm" id="confirm-button" class="confirm-button">Confirm &amp; Deposit</div>
+              </div>
+              <div data-hf-id="hf-jh6z" id="paid-state" style="display:none">
+                <div data-hf-id="hf-1b7u" class="success-row"><div data-hf-id="hf-qg7p" class="success-left"><span data-hf-id="hf-qb1c" class="check">✓</span><span data-hf-id="hf-xujt">Payment confirmed · Balance due $0.00</span></div><span data-hf-id="hf-rt0o" class="paid-status">PAID</span></div>
+                <div data-hf-id="hf-rwsu" class="success-row"><div data-hf-id="hf-u1ft" class="success-left"><span data-hf-id="hf-n97c" class="check">✓</span><span data-hf-id="hf-bj2v">Income ledger entry created</span></div><span data-hf-id="hf-jcju" class="success-right">+$4,800.00</span></div>
+              </div>
+              <div data-hf-id="hf-yykl" class="flow-note">Illustrative account and payment details</div>
+            </div>
+          </div>
+        </div>
+        <div data-hf-id="hf-hfar" id="payment-caption" class="caption">One payment. One confirmed ledger entry.</div>
+      </section>
+
+      <section data-hf-id="hf-zk97" id="scene4" class="scene clip" data-start="9" data-duration="4.1" data-track-index="3">
+        <div data-hf-id="hf-5xkk" class="browser" id="cashflow-window">
+          <div data-hf-id="hf-1tpl" class="browser-bar"><div data-hf-id="hf-21xk" class="window-dots"><i data-hf-id="hf-zsm9"></i><i data-hf-id="hf-06xa"></i><i data-hf-id="hf-26gf"></i></div><div data-hf-id="hf-ofc8" class="address">Freelancer Finance · Financial Overview</div></div>
+          <div data-hf-id="hf-j83h" class="app-shell">
+            <aside data-hf-id="hf-dmww" class="sidebar">
+              <div data-hf-id="hf-9w9v" class="side-brand"><span data-hf-id="hf-d1w6" class="brand-mark">F</span>Freelancer Finance</div>
+              <div data-hf-id="hf-ajae" class="nav-label">Workspace</div>
+              <div data-hf-id="hf-km3i" class="nav-item active"><span data-hf-id="hf-th9u" class="nav-icon"></span>Overview</div>
+              <div data-hf-id="hf-i3pl" class="nav-item"><span data-hf-id="hf-k9r8" class="nav-icon lines"></span>Transactions</div>
+              <div data-hf-id="hf-z9cn" class="nav-item"><span data-hf-id="hf-ix3j" class="nav-icon round"></span>Income</div>
+              <div data-hf-id="hf-ljpx" class="nav-item"><span data-hf-id="hf-t2yt" class="nav-icon"></span>Expenses</div>
+              <div data-hf-id="hf-dmzd" class="nav-item"><span data-hf-id="hf-u9vw" class="nav-icon"></span>Accounts</div>
+              <div data-hf-id="hf-vrzr" class="nav-label" style="margin-top:17px">Business</div>
+              <div data-hf-id="hf-0df6" class="nav-item"><span data-hf-id="hf-tvkv" class="nav-icon"></span>Projects</div>
+              <div data-hf-id="hf-ofud" class="nav-item"><span data-hf-id="hf-jvg7" class="nav-icon lines"></span>Invoices</div>
+              <div data-hf-id="hf-gsz7" class="nav-item"><span data-hf-id="hf-v2hy" class="nav-icon"></span>Taxes</div>
+            </aside>
+            <main data-hf-id="hf-w36s" class="app-main">
+              <div data-hf-id="hf-dgas" class="page-head"><div data-hf-id="hf-c4s8"><div data-hf-id="hf-99qy" class="page-title">Financial Overview</div><div data-hf-id="hf-w2dq" class="page-subtitle">Live authoritative ledger figures for your freelance business</div></div><div data-hf-id="hf-mgq9" class="head-controls"><div data-hf-id="hf-gzg5" class="select-chip">USD <span data-hf-id="hf-mnfm" class="caret">▾</span></div><div data-hf-id="hf-4855" class="select-chip">This Month <span data-hf-id="hf-omyr" class="caret">▾</span></div></div></div>
+              <div data-hf-id="hf-70j5" class="metric-grid">
+                <div data-hf-id="hf-fjds" class="metric-card"><div data-hf-id="hf-2h06" class="metric-label">Net Cash Received</div><div data-hf-id="hf-9qre" class="metric-value green">$17,650.00</div><div data-hf-id="hf-9eel" class="metric-note">Confirmed payments only</div></div>
+                <div data-hf-id="hf-f52r" class="metric-card"><div data-hf-id="hf-b98q" class="metric-label">Total Expenses</div><div data-hf-id="hf-2b80" class="metric-value">$4,600.00</div><div data-hf-id="hf-7z72" class="metric-note">Recorded outflows</div></div>
+                <div data-hf-id="hf-eqrq" class="metric-card"><div data-hf-id="hf-lxex" class="metric-label">Net Cash Flow</div><div data-hf-id="hf-q1wz" class="metric-value indigo">$13,050.00</div><div data-hf-id="hf-x4q8" class="metric-note">Inflows minus outflows</div></div>
+                <div data-hf-id="hf-ecgp" class="metric-card"><div data-hf-id="hf-qhzi" class="metric-label">Operating Profit</div><div data-hf-id="hf-nwd5" class="metric-value">$13,050.00</div><div data-hf-id="hf-rcp4" class="metric-note">Business revenue minus expenses</div></div>
+              </div>
+              <div data-hf-id="hf-a4pn" class="content-grid" style="grid-template-columns:1.75fr .85fr">
+                <div data-hf-id="hf-hbwz" class="panel"><div data-hf-id="hf-w1mw" class="panel-head"><div data-hf-id="hf-bqh7"><div data-hf-id="hf-l5vg" class="panel-title">Income vs Expenses (6 Months)</div><div data-hf-id="hf-nyx7" class="panel-subtitle">Historical monthly movements in USD</div></div><div data-hf-id="hf-xb56" class="select-chip">6 months <span data-hf-id="hf-p19s" class="caret">▾</span></div></div><div data-hf-id="hf-1ma1" class="chart-wrap"><svg data-hf-id="hf-0d8m" class="chart-svg" viewBox="0 0 780 235" aria-label="Illustrative six month income and expense trend"><defs data-hf-id="hf-vl9d"><linearGradient data-hf-id="hf-lqm8" id="incomeFill2" x1="0" y1="0" x2="0" y2="1"><stop data-hf-id="hf-qmsz" offset="0" stop-color="#10b981" stop-opacity=".18"/><stop data-hf-id="hf-623v" offset="1" stop-color="#10b981" stop-opacity="0"/></linearGradient><linearGradient data-hf-id="hf-x0wh" id="expenseFill2" x1="0" y1="0" x2="0" y2="1"><stop data-hf-id="hf-zphs" offset="0" stop-color="#ef4444" stop-opacity=".13"/><stop data-hf-id="hf-lui7" offset="1" stop-color="#ef4444" stop-opacity="0"/></linearGradient></defs><path data-hf-id="hf-u0cy" class="gridline" d="M25 35H755M25 92H755M25 149H755M25 206H755"/><path data-hf-id="hf-kkuo" fill="url(#incomeFill2)" d="M25 170 C90 150 100 95 165 112 S250 126 305 73 S390 104 440 62 S535 83 590 43 S685 64 755 24 V210 H25Z"/><path data-hf-id="hf-66zf" fill="url(#expenseFill2)" d="M25 190 C88 184 110 162 165 175 S255 160 305 151 S390 169 440 135 S535 154 590 123 S690 140 755 105 V210 H25Z"/><path data-hf-id="hf-eete" class="income-line" d="M25 170 C90 150 100 95 165 112 S250 126 305 73 S390 104 440 62 S535 83 590 43 S685 64 755 24"/><path data-hf-id="hf-ct5f" class="expense-line" d="M25 190 C88 184 110 162 165 175 S255 160 305 151 S390 169 440 135 S535 154 590 123 S690 140 755 105"/></svg><div data-hf-id="hf-voa4" class="chart-labels"><span data-hf-id="hf-1w7s">Jul</span><span data-hf-id="hf-9n4g">Aug</span><span data-hf-id="hf-dvkr">Sep</span><span data-hf-id="hf-q001">Oct</span><span data-hf-id="hf-t76g">Nov</span><span data-hf-id="hf-msfr">Dec</span></div></div></div>
+                <div data-hf-id="hf-hq80" class="panel"><div data-hf-id="hf-vnbv" class="panel-head"><div data-hf-id="hf-bc66"><div data-hf-id="hf-2wus" class="panel-title">Cash Flow Summary</div><div data-hf-id="hf-9fmo" class="panel-subtitle">This month · USD</div></div></div><div data-hf-id="hf-odgb" class="invoice-row"><div data-hf-id="hf-axv5"><div data-hf-id="hf-sebt" class="invoice-main">Received income</div><div data-hf-id="hf-vm8c" class="invoice-sub">Settled payments</div></div><div data-hf-id="hf-4w34" class="invoice-amount" style="color:#047857">$17,650.00</div></div><div data-hf-id="hf-orrc" class="invoice-row"><div data-hf-id="hf-ajk4"><div data-hf-id="hf-38p4" class="invoice-main">Expenses</div><div data-hf-id="hf-1h3m" class="invoice-sub">Confirmed outflows</div></div><div data-hf-id="hf-h2js" class="invoice-amount" style="color:#be123c">−$4,600.00</div></div><div data-hf-id="hf-lzm5" class="invoice-row"><div data-hf-id="hf-a593"><div data-hf-id="hf-7esk" class="invoice-main">Internal transfers</div><div data-hf-id="hf-qyt4" class="invoice-sub">Net effect on income</div></div><div data-hf-id="hf-bxsg" class="invoice-amount">$0.00</div></div></div>
+              </div>
+              <div data-hf-id="hf-edr3" class="demo-tag">DEMO DATA</div>
+            </main>
+          </div>
+        </div>
+        <div data-hf-id="hf-0s7s" class="dashboard-banner" id="flow-caption"><div data-hf-id="hf-unen" class="banner-pill"><span data-hf-id="hf-f7o1" class="banner-dot"></span>Cash flow that means what it says.</div></div>
+      </section>
+
+      <section data-hf-id="hf-iifm" id="scene5" class="scene clip" data-start="13.1" data-duration="4.4" data-track-index="4">
+        <div data-hf-id="hf-9g16" class="brand-lockup"><span data-hf-id="hf-buz3" class="brand-mark">F</span><span data-hf-id="hf-ps0q">Freelancer Finance</span></div>
+        <div data-hf-id="hf-9frw" class="hero-main" style="top:108px;left:190px;width:auto">
+          <div data-hf-id="hf-ocxh" class="eyebrow">The details stay attached</div>
+          <div data-hf-id="hf-yesx" class="hero-title" style="margin-top:17px;font-size:58px;max-width:1400px">Every figure keeps its context.</div>
+        </div>
+        <div data-hf-id="hf-fvfp" class="detail-stage" style="top:260px">
+          <div data-hf-id="hf-eb99" class="detail-card" id="fx-card">
+            <div data-hf-id="hf-si2d" class="detail-top"><div data-hf-id="hf-2t2x" class="detail-icon">↔</div><div data-hf-id="hf-1818" class="select-chip">Multi-currency <span data-hf-id="hf-nucp" class="caret">▾</span></div></div>
+            <div data-hf-id="hf-1pke" class="detail-label">Historical conversion</div>
+            <div data-hf-id="hf-2la3" class="detail-title">USD <span data-hf-id="hf-4ev4" style="color:#4f46e5">→</span> PKR</div>
+            <div data-hf-id="hf-a25s" class="detail-copy">The rate used for a transaction stays with that transaction.</div>
+            <div data-hf-id="hf-5cby" class="currency-pair"><div data-hf-id="hf-lzj4" class="currency-chip">USD</div><div data-hf-id="hf-a8wu" class="pair-arrow">→</div><div data-hf-id="hf-2aex" class="currency-chip">PKR</div></div>
+            <div data-hf-id="hf-bua8" class="saved-note"><span data-hf-id="hf-skw0" class="saved-dot"></span>Rate saved on transaction date</div>
+          </div>
+          <div data-hf-id="hf-vjb2" class="detail-card" id="tax-card">
+            <div data-hf-id="hf-3c15" class="detail-top"><div data-hf-id="hf-1t86" class="detail-icon">%</div><div data-hf-id="hf-7nzl" class="select-chip">Tax planning</div></div>
+            <div data-hf-id="hf-1tsd" class="detail-label">Estimated Tax Reserve</div>
+            <div data-hf-id="hf-t459" class="detail-title">A target that follows profit.</div>
+            <div data-hf-id="hf-pjbk" class="detail-copy">Keep the reserve in view as business profit changes.</div>
+            <div data-hf-id="hf-qiga" class="reserve-gauge"><div data-hf-id="hf-e3c8" class="gauge-ring"><span data-hf-id="hf-mzdf">LIVE</span></div><div data-hf-id="hf-u4i2" class="gauge-copy">Calculated from<br data-hf-id="hf-rsrt" /><strong data-hf-id="hf-8oi1">net business profit</strong><br data-hf-id="hf-szow" />and your reserve target.</div></div>
+            <div data-hf-id="hf-mc53" class="reserve-note">An estimate for planning — your figures stay yours.</div>
+          </div>
+        </div>
+        <div data-hf-id="hf-7cug" class="caption" id="details-caption" style="bottom:73px">Currency history. Tax reserve. Context intact.</div>
+      </section>
+
+      <section data-hf-id="hf-baax" id="scene6" class="scene clip" data-start="17.5" data-duration="2.5" data-track-index="5">
+        <div data-hf-id="hf-m89r" class="outro" id="outro-lockup">
+          <span data-hf-id="hf-teiv" class="brand-mark outro-mark">F</span>
+          <div data-hf-id="hf-m0ow" class="outro-name">Freelancer Finance</div>
+          <div data-hf-id="hf-fyuj" class="outro-line">Built for the money behind independent work.</div>
+          <div data-hf-id="hf-dh08" class="outro-rule"></div>
+        </div>
+        <div data-hf-id="hf-00tz" class="footer-mark">Know what came in. Know what remains.</div>
+      </section>
+
+      <audio data-hf-id="hf-70b6" id="bg-music" data-start="0" data-duration="20" data-track-index="10" data-volume="0.28" data-fade-in="0.45" data-fade-out="0.8" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3"></audio>
+      <audio data-hf-id="hf-hli6" id="payment-click" data-start="7.12" data-duration="0.01" data-track-index="11" data-volume="0.62" src="assets/sfx/interface/click_003.ogg"></audio>
+      <audio data-hf-id="hf-cp4x" id="ledger-confirm" data-start="8.74" data-duration="0.18" data-track-index="12" data-volume="0.58" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
+      <audio data-hf-id="hf-wkow" id="brand-accent" data-start="17.47" data-duration="0.12" data-track-index="13" data-volume="0.42" src="assets/sfx/interface/bong_001.ogg"></audio>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+
+      tl.fromTo("#hero-copy", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.52, ease: "power3.out" }, 0.10);
+      tl.fromTo("#hero-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.52, ease: "power2.out" }, 0.72);
+      tl.fromTo("#sent-pill", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 1.05);
+      tl.fromTo("#cash-pill", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 1.22);
+      tl.to("#hero-copy", { opacity: 0, y: -8, duration: 0.22, ease: "power1.in" }, 2.16);
+
+      tl.fromTo("#receivable-window", { opacity: 0, y: 18, scale: 0.99 }, { opacity: 1, y: 0, scale: 1, duration: 0.52, ease: "power3.out" }, 2.42);
+      tl.fromTo("#receivable-caption", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.38, ease: "power2.out" }, 3.08);
+      tl.to("#receivable-window", { opacity: 0, scale: 1.008, duration: 0.24, ease: "power1.in" }, 5.26);
+      tl.to("#receivable-caption", { opacity: 0, duration: 0.18 }, 5.28);
+
+      tl.fromTo("#payment-window", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.34, ease: "power2.out" }, 5.52);
+      tl.fromTo("#payment-modal", { opacity: 0, y: 18, scale: 0.985 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "power2.out" }, 5.66);
+      tl.fromTo("#payment-caption", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.32, ease: "power2.out" }, 6.1);
+      tl.to("#payment-form", { opacity: 0, y: -7, duration: 0.16, ease: "power1.in" }, 7.28);
+      tl.set("#paid-state", { display: "block" }, 7.45);
+      tl.fromTo("#paid-state", { opacity: 0, y: 9 }, { opacity: 1, y: 0, duration: 0.34, ease: "power2.out" }, 7.46);
+      tl.to("#payment-modal", { scale: 1.012, duration: 0.28, ease: "power2.out" }, 8.62);
+      tl.to("#payment-window", { opacity: 0, duration: 0.22, ease: "power1.in" }, 8.80);
+      tl.to("#payment-caption", { opacity: 0, duration: 0.18 }, 8.80);
+
+      tl.fromTo("#cashflow-window", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.42, ease: "power2.out" }, 9.02);
+      tl.fromTo("#flow-caption", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.36, ease: "power2.out" }, 9.29);
+      tl.fromTo("#cashflow-window .income-line", { opacity: 0.45, scaleX: 0.84 }, { opacity: 1, scaleX: 1, duration: 0.85, ease: "power2.out" }, 9.42);
+      tl.fromTo("#cashflow-window .expense-line", { opacity: 0.4, scaleX: 0.82 }, { opacity: 1, scaleX: 1, duration: 0.78, ease: "power2.out" }, 9.52);
+      tl.to("#cashflow-window", { opacity: 0, duration: 0.23, ease: "power1.in" }, 12.84);
+      tl.to("#flow-caption", { opacity: 0, duration: 0.18 }, 12.88);
+
+      tl.fromTo("#fx-card", { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.46, ease: "power2.out" }, 13.20);
+      tl.fromTo("#tax-card", { opacity: 0, x: 18 }, { opacity: 1, x: 0, duration: 0.46, ease: "power2.out" }, 13.38);
+      tl.fromTo("#details-caption", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 14.08);
+      tl.to("#fx-card", { opacity: 0, y: -8, duration: 0.2, ease: "power1.in" }, 17.20);
+      tl.to("#tax-card", { opacity: 0, y: -8, duration: 0.2, ease: "power1.in" }, 17.20);
+      tl.to("#details-caption", { opacity: 0, duration: 0.18 }, 17.20);
+
+      tl.fromTo("#outro-lockup", { opacity: 0, y: 13 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 17.55);
+      tl.fromTo(".footer-mark", { opacity: 0 }, { opacity: 1, duration: 0.42, ease: "power1.out" }, 18.15);
+      tl.to("#outro-lockup", { scale: 1.01, duration: 0.5, ease: "power1.out" }, 19.15);
+      tl.seek(0);
+    </script>
+  </body>
+</html>

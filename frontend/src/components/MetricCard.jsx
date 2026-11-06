@@ -7,8 +7,8 @@ export function MetricCard({ title, amount, currency = 'USD', subtitle, icon: Ic
     emerald: 'text-emerald-600 bg-emerald-50 border-emerald-100',
     amber: 'text-amber-600 bg-amber-50 border-amber-100',
     rose: 'text-rose-600 bg-rose-50 border-rose-100',
-    blue: 'text-blue-600 bg-blue-50 border-blue-100',
-    purple: 'text-purple-600 bg-purple-50 border-purple-100',
+    slate: 'text-slate-600 bg-slate-100 border-slate-200',
+    stone: 'text-amber-600 bg-amber-50 border-amber-100',
   };
 
   const badgeStyle = colorMap[color] || colorMap.indigo;
