@@ -70,7 +70,7 @@ export function Dashboard() {
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           {/* In-view Currency Selector */}
           <div className="inline-flex items-center gap-1.5 bg-white rounded-lg border border-slate-200 px-3 py-1 shadow-2xs text-xs font-semibold text-slate-700">
-            <Globe className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+            <Globe className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <span className="text-[11px] text-slate-400 font-normal">View In:</span>
             <select
               value={activeCurrency}
@@ -98,7 +98,7 @@ export function Dashboard() {
                 onClick={() => setPeriod(item.id)}
                 className={`px-3 py-1.5 text-xs font-medium rounded-md transition ${
                   period === item.id
-                    ? 'bg-indigo-600 text-white shadow-xs font-bold'
+                    ? 'bg-slate-900 text-white dark:bg-white dark:text-black shadow-xs font-bold'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                 }`}
               >
@@ -243,7 +243,7 @@ export function Dashboard() {
                   <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: CATEGORY_COLORS[idx % CATEGORY_COLORS.length] }} />
                   {c.name}
                 </span>
-                <span className="font-semibold text-slate-900">{formatCurrency(c.value, activeCurrency)}</span>
+                <span className="font-semibold font-mono text-[var(--analytics-text)]">{formatCurrency(c.value, activeCurrency)}</span>
               </div>
             ))}
           </div>
@@ -259,7 +259,7 @@ export function Dashboard() {
               <h3 className="font-semibold text-slate-900 text-sm">Upcoming Obligations</h3>
               <p className="text-xs text-slate-500">Invoices due and subscription renewals</p>
             </div>
-            <Link to="/invoices" className="text-xs text-indigo-600 font-medium hover:underline">View All</Link>
+            <Link to="/invoices" className="text-xs text-slate-400 hover:text-white transition font-medium">View All &rarr;</Link>
           </div>
 
           <div className="space-y-2.5">
@@ -287,7 +287,7 @@ export function Dashboard() {
                   <p className="text-slate-500">{sub.vendor || 'Subscription'} • Renews {formatDate(sub.renewal_date)}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-bold text-rose-600">{formatCurrency(sub.amount, sub.currency)}</p>
+                  <p className="font-bold text-rose-500">{formatCurrency(sub.amount, sub.currency)}</p>
                   <span className="text-[10px] text-slate-400 uppercase font-semibold">{sub.billing_frequency}</span>
                 </div>
               </div>
@@ -302,7 +302,7 @@ export function Dashboard() {
               <h3 className="font-semibold text-slate-900 text-sm">Recent Activity</h3>
               <p className="text-xs text-slate-500">Latest confirmed transactions</p>
             </div>
-            <Link to="/transactions" className="text-xs text-indigo-600 font-medium hover:underline">Full Ledger</Link>
+            <Link to="/transactions" className="text-xs text-slate-400 hover:text-white transition font-medium">Full Ledger &rarr;</Link>
           </div>
 
           <div className="space-y-2.5">

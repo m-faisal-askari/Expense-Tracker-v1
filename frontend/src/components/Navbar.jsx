@@ -32,7 +32,7 @@ export function Navbar({ onOpenSidebar }) {
           
           {/* Quick Currency Switcher */}
           <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700">
-            <Globe className="w-3.5 h-3.5 text-indigo-600" />
+            <Globe className="w-3.5 h-3.5 text-slate-400" />
             <select
               value={currency}
               onChange={handleCurrencyChange}
@@ -76,7 +76,7 @@ export function Navbar({ onOpenSidebar }) {
               onClick={() => setAuthModalOpen(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition shadow-2xs"
             >
-              <LogIn className="w-3.5 h-3.5 text-indigo-600" />
+              <LogIn className="w-3.5 h-3.5 text-slate-500" />
               Sign In / Register
             </button>
           ) : (
@@ -86,7 +86,7 @@ export function Navbar({ onOpenSidebar }) {
                 className="flex items-center gap-2 px-2.5 py-1 rounded-lg hover:bg-slate-50 transition"
                 title="Account Settings"
               >
-                <div className="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                <div className="w-7 h-7 rounded-full bg-slate-900 text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs shadow-xs">
                   {user.full_name?.charAt(0) || 'U'}
                 </div>
                 <div className="hidden md:block text-left">
@@ -97,7 +97,7 @@ export function Navbar({ onOpenSidebar }) {
 
               <button
                 onClick={logout}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-slate-50 transition"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-slate-50 transition"
                 title="Log Out"
               >
                 <LogOut className="w-4 h-4" />

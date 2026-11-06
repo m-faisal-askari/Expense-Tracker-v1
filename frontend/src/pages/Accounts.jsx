@@ -128,7 +128,7 @@ export function Accounts() {
         <div className="flex items-center gap-3">
           <div className="bg-white px-3.5 py-1.5 rounded-lg border border-slate-200/80 shadow-xs">
             <span className="text-[10px] uppercase font-semibold text-slate-400 block">Total Liquidity ({activeCurrency})</span>
-            <span className="text-sm font-bold text-slate-900">{formatCurrency(totalBalance, activeCurrency)}</span>
+            <span className="text-sm font-bold font-mono text-[var(--analytics-text)]">{formatCurrency(totalBalance, activeCurrency)}</span>
           </div>
 
           <button
@@ -166,7 +166,7 @@ export function Accounts() {
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center gap-2.5">
-                    <div className="p-2 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-600">
+                    <div className="p-2 rounded-lg bg-[var(--analytics-soft)] border border-[var(--analytics-border)] text-[var(--analytics-text)]">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
@@ -177,7 +177,7 @@ export function Accounts() {
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => openEditModal(acc)}
-                      className="text-slate-400 hover:text-indigo-600 transition p-1"
+                      className="text-slate-400 hover:text-white transition p-1"
                       title="Edit Account"
                     >
                       <Edit3 className="w-3.5 h-3.5" />
@@ -188,7 +188,7 @@ export function Accounts() {
                           deleteAccountMutation.mutate(acc.id);
                         }
                       }}
-                      className="text-slate-400 hover:text-rose-600 transition p-1"
+                      className="text-slate-400 hover:text-rose-500 transition p-1"
                       title="Archive/Delete"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -200,9 +200,9 @@ export function Accounts() {
                   <div>
                     <span className="text-[10px] text-slate-400 block font-medium">Current Balance</span>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-xl font-bold text-slate-900">{formatCurrency(acc.current_balance, acc.currency)}</span>
+                      <span className="text-xl font-bold font-mono text-[var(--analytics-text)]">{formatCurrency(acc.current_balance, acc.currency)}</span>
                       {acc.currency !== activeCurrency && (
-                        <span className="text-xs font-semibold text-indigo-600">
+                        <span className="text-xs font-semibold text-slate-400 font-mono">
                           ≈ {formatCurrency(convert(acc.current_balance, acc.currency), activeCurrency)}
                         </span>
                       )}

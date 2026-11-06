@@ -123,7 +123,7 @@ export function Sidebar({ isOpen, onClose }) {
             </div>
             <div className="overflow-hidden">
               <p className="sidebar-user-name text-xs font-medium truncate">Independent Freelancer</p>
-              <p className="text-[10px] text-emerald-400 font-mono">● Production Engine</p>
+              <p className="text-[10px] text-[var(--analytics-text)] font-mono">● Production Engine</p>
             </div>
           </div>
         </div>
