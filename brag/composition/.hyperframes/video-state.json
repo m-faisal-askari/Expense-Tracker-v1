@@ -1,7 +1,7 @@
 {
   "version": 1,
   "historyId": "c89d2636-f3c6-4dad-ada4-3b8644281ab0",
-  "currentRevision": "46929ac5-1722-45f7-9744-78a771db03a8",
+  "currentRevision": "0c8b43fb-3c12-427c-b180-fca389116480",
   "pendingChanges": false,
   "files": {
     "assets/music/cues/happy-beats-business-moves-vol-12-by-ende-dot-app.music-cues.json": {
@@ -29,16 +29,16 @@
       "content": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\13\\135606f5434a64d4dd4a5351d35ba17da1f468117dfd5f08c1aa475c1015321a"
     },
     "debug.log": {
-      "hash": "dd2cd3c63e9343cf811c1e8ad01d32ffe7a86931878809e87608c3ce6f257463",
-      "content": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\dd\\dd2cd3c63e9343cf811c1e8ad01d32ffe7a86931878809e87608c3ce6f257463"
+      "hash": "4633f1cb150f57e6ac1448c3c61e2573ead0f684c4b25ac9cb6353dd04f61ba8",
+      "content": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\46\\4633f1cb150f57e6ac1448c3c61e2573ead0f684c4b25ac9cb6353dd04f61ba8"
     },
     "index.html": {
-      "hash": "5f65c5bb015a0e5eef2b185f76a8c63f1ec3a1cb91f86d20eb9b47dbf72303e8",
-      "content": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\5f\\5f65c5bb015a0e5eef2b185f76a8c63f1ec3a1cb91f86d20eb9b47dbf72303e8"
+      "hash": "63096a01ad324b508929c0619a0a2e31d62e919c54601425ec2c7de772c9beeb",
+      "content": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\63\\63096a01ad324b508929c0619a0a2e31d62e919c54601425ec2c7de772c9beeb"
     },
     "meta.json": {
-      "hash": "1ab27da9f59376cd3b39654f0b5706090f9c52b8ad234fca1fa2cf68f4d1fbaf",
-      "content": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\1a\\1ab27da9f59376cd3b39654f0b5706090f9c52b8ad234fca1fa2cf68f4d1fbaf"
+      "hash": "1666670882b38f70e17d6b267ee2e95b0f7d00d0fd75c484186eb60103d9e9ff",
+      "content": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\16\\1666670882b38f70e17d6b267ee2e95b0f7d00d0fd75c484186eb60103d9e9ff"
     },
     "assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3": {
       "hash": "5888d4bd2ba0119b87a94e502ae2cc401c08192945cc5e5c2f8e8a33aa47a0a1",
@@ -73,6 +73,29 @@
         "index.html": {
           "before": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\33\\33061e1fbabbf2a1117fbb40a0643322fd0cfbfde3c3414bbdea4b575c7ca796",
           "after": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\5f\\5f65c5bb015a0e5eef2b185f76a8c63f1ec3a1cb91f86d20eb9b47dbf72303e8"
+        }
+      }
+    },
+    "0c8b43fb-3c12-427c-b180-fca389116480": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793942463820,
+      "endedAt": 1793942466070,
+      "files": {
+        "debug.log": {
+          "before": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\dd\\dd2cd3c63e9343cf811c1e8ad01d32ffe7a86931878809e87608c3ce6f257463",
+          "after": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\46\\4633f1cb150f57e6ac1448c3c61e2573ead0f684c4b25ac9cb6353dd04f61ba8"
+        },
+        "index.html": {
+          "before": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\5f\\5f65c5bb015a0e5eef2b185f76a8c63f1ec3a1cb91f86d20eb9b47dbf72303e8",
+          "after": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\63\\63096a01ad324b508929c0619a0a2e31d62e919c54601425ec2c7de772c9beeb"
+        },
+        "meta.json": {
+          "before": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\1a\\1ab27da9f59376cd3b39654f0b5706090f9c52b8ad234fca1fa2cf68f4d1fbaf",
+          "after": "C:\\Users\\IT-HOME\\.cache\\hyperframes\\history\\c89d2636-f3c6-4dad-ada4-3b8644281ab0\\blobs\\16\\1666670882b38f70e17d6b267ee2e95b0f7d00d0fd75c484186eb60103d9e9ff"
         }
       }
     }
