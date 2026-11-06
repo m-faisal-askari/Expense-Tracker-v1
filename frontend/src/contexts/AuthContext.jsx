@@ -107,11 +107,17 @@ export function AuthProvider({ children }) {
   };
 
   const loginWithGoogle = async () => {
+    // Resolve redirect URL cleanly (browser origin or configured production site)
+    const targetOrigin = (typeof window !== 'undefined' && window.location.origin)
+      ? window.location.origin
+      : (import.meta.env.VITE_SITE_URL || 'https://expense-tracker-v1-xi.vercel.app');
+    const cleanOrigin = targetOrigin.replace(/\/$/, '');
+
     // Official Supabase Google OAuth provider redirect
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin
+        redirectTo: cleanOrigin
       }
     });
 

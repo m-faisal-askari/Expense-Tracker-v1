@@ -15,7 +15,8 @@ import {
   Target,
   BarChart3,
   Settings,
-  DollarSign
+  DollarSign,
+  ShieldCheck
 } from 'lucide-react';
 
 const navigationGroups = [
@@ -56,6 +57,7 @@ const navigationGroups = [
     title: 'Account',
     items: [
       { name: 'Settings & Profile', path: '/settings', icon: Settings },
+      { name: 'Privacy & Terms', path: '/privacy', icon: ShieldCheck },
     ]
   }
 ];

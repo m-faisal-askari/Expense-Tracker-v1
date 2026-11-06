@@ -27,7 +27,8 @@ class Settings(BaseSettings):
         "http://localhost:3000",
         "http://127.0.0.1:5173",
         "http://127.0.0.1:3000",
-        "https://patient-fern-1718.fly.dev"
+        "https://patient-fern-1718.fly.dev",
+        "https://expense-tracker-v1-xi.vercel.app"
     ]
 
 settings = Settings()

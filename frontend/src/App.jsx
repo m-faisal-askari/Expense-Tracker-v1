@@ -16,6 +16,9 @@ import { Savings } from './pages/Savings';
 import { Reports } from './pages/Reports';
 import { Settings } from './pages/Settings';
 import { LoginPage } from './pages/LoginPage';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsOfService } from './pages/TermsOfService';
+import { SecurityPolicy } from './pages/SecurityPolicy';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import { useAuth } from './contexts/AuthContext';
 
@@ -30,30 +33,35 @@ export default function App() {
     );
   }
 
-  // If not logged in, enforce the Login / Registration screen
-  if (!user) {
-    return <LoginPage />;
-  }
-
   return (
     <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Dashboard />} />
-        <Route path="transactions" element={<Transactions />} />
-        <Route path="income" element={<Income />} />
-        <Route path="expenses" element={<Expenses />} />
-        <Route path="accounts" element={<Accounts />} />
-        <Route path="budgets" element={<Budgets />} />
-        <Route path="clients" element={<Clients />} />
-        <Route path="projects" element={<Projects />} />
-        <Route path="invoices" element={<Invoices />} />
-        <Route path="subscriptions" element={<Subscriptions />} />
-        <Route path="taxes" element={<Taxes />} />
-        <Route path="savings" element={<Savings />} />
-        <Route path="reports" element={<Reports />} />
-        <Route path="settings" element={<Settings />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Route>
+      {/* Public Legal & Compliance Routes (Always Accessible) */}
+      <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/terms" element={<TermsOfService />} />
+      <Route path="/security" element={<SecurityPolicy />} />
+
+      {/* Authenticated Application Routes */}
+      {user ? (
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="transactions" element={<Transactions />} />
+          <Route path="income" element={<Income />} />
+          <Route path="expenses" element={<Expenses />} />
+          <Route path="accounts" element={<Accounts />} />
+          <Route path="budgets" element={<Budgets />} />
+          <Route path="clients" element={<Clients />} />
+          <Route path="projects" element={<Projects />} />
+          <Route path="invoices" element={<Invoices />} />
+          <Route path="subscriptions" element={<Subscriptions />} />
+          <Route path="taxes" element={<Taxes />} />
+          <Route path="savings" element={<Savings />} />
+          <Route path="reports" element={<Reports />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      ) : (
+        <Route path="*" element={<LoginPage />} />
+      )}
     </Routes>
   );
 }

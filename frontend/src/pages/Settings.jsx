@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Save, User, Globe, Shield, CheckCircle2 } from 'lucide-react';
+import { Save, User, Globe, Shield, CheckCircle2, FileText, Scale, Lock, ExternalLink } from 'lucide-react';
 import { api } from '../api/client';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 
@@ -190,6 +191,65 @@ export function Settings() {
           </button>
         </div>
       </form>
+
+      {/* Legal & Compliance Section */}
+      <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+        <div className="flex items-center gap-2 text-slate-800 font-bold text-base pb-3 border-b border-slate-100">
+          <Shield className="w-5 h-5 text-indigo-600" />
+          <h3>Legal, Privacy & Compliance Disclosures</h3>
+        </div>
+        <p className="text-xs text-slate-500 leading-relaxed">
+          FreelanceFinance is engineered under strict tenant isolation. Review our official privacy commitments, 
+          data collection disclosures, and user agreements anytime.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+          <Link
+            to="/privacy"
+            className="p-3.5 rounded-xl border border-slate-200 hover:border-indigo-500 hover:bg-indigo-50/30 transition group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between text-indigo-600 mb-1.5">
+                <FileText className="w-5 h-5" />
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600 transition" />
+              </div>
+              <h4 className="font-bold text-slate-800 text-xs">Privacy Policy</h4>
+              <p className="text-[11px] text-slate-500 mt-1">What data we collect, why, and how your financial records are protected.</p>
+            </div>
+            <span className="text-[10px] font-semibold text-indigo-600 mt-3 block">Read Policy →</span>
+          </Link>
+
+          <Link
+            to="/terms"
+            className="p-3.5 rounded-xl border border-slate-200 hover:border-indigo-500 hover:bg-indigo-50/30 transition group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between text-indigo-600 mb-1.5">
+                <Scale className="w-5 h-5" />
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600 transition" />
+              </div>
+              <h4 className="font-bold text-slate-800 text-xs">Terms of Service</h4>
+              <p className="text-[11px] text-slate-500 mt-1">Platform service agreement, acceptable use, and accounting disclaimers.</p>
+            </div>
+            <span className="text-[10px] font-semibold text-indigo-600 mt-3 block">View Agreement →</span>
+          </Link>
+
+          <Link
+            to="/security"
+            className="p-3.5 rounded-xl border border-slate-200 hover:border-indigo-500 hover:bg-indigo-50/30 transition group flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between text-emerald-600 mb-1.5">
+                <Lock className="w-5 h-5" />
+                <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-600 transition" />
+              </div>
+              <h4 className="font-bold text-slate-800 text-xs">Security Safeguards</h4>
+              <p className="text-[11px] text-slate-500 mt-1">Multi-tenant isolation, TLS 1.3 encryption, and Decimal engine integrity.</p>
+            </div>
+            <span className="text-[10px] font-semibold text-emerald-600 mt-3 block">Learn More →</span>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import { ShieldCheck, Mail, Lock, User, ArrowRight, DollarSign, TrendingUp, CheckCircle2 } from 'lucide-react';
@@ -191,6 +192,13 @@ export function LoginPage() {
                 <>Create Clean Account <ArrowRight className="w-3.5 h-3.5" /></>
               )}
             </button>
+
+            <p className="text-[11px] text-center text-slate-500 mt-3">
+              By continuing, you agree to our{' '}
+              <Link to="/terms" className="text-indigo-400 hover:underline">Terms of Service</Link>{' '}
+              and{' '}
+              <Link to="/privacy" className="text-indigo-400 hover:underline">Privacy Policy</Link>.
+            </p>
           </form>
 
           {/* Features note */}
@@ -204,6 +212,15 @@ export function LoginPage() {
               <span>Automatic real-time multi-currency calculations</span>
             </div>
           </div>
+        </div>
+
+        {/* Public Legal Footer */}
+        <div className="mt-8 text-center text-xs text-slate-500 flex items-center justify-center gap-4 relative z-10">
+          <Link to="/privacy" className="hover:text-slate-300 transition">Privacy Policy</Link>
+          <span>•</span>
+          <Link to="/terms" className="hover:text-slate-300 transition">Terms of Service</Link>
+          <span>•</span>
+          <Link to="/security" className="hover:text-slate-300 transition">Security Architecture</Link>
         </div>
       </div>
     </div>
