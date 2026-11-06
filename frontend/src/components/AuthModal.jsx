@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Modal } from './Modal';
 import { useAuth } from '../contexts/AuthContext';
-import { Mail, Lock, User, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { Mail, Lock, User, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export function AuthModal({ isOpen, onClose }) {
-  const { login, register, loginWithGoogle, continueAsGuest } = useAuth();
+  const { login, register, loginWithGoogle } = useAuth();
   const [mode, setMode] = useState('login'); // 'login' or 'register'
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,10 +17,15 @@ export function AuthModal({ isOpen, onClose }) {
     setError('');
     setLoading(true);
     try {
+      let result;
       if (mode === 'login') {
-        await login(email, password);
+        result = await login(email, password);
       } else {
-        await register(email, password, fullName);
+        result = await register(email, password, fullName);
+      }
+      if (result?.confirmation_required) {
+        setError('Check your email to confirm your account before signing in.');
+        return;
       }
       onClose();
     } catch (err) {
@@ -34,24 +39,13 @@ export function AuthModal({ isOpen, onClose }) {
     setError('');
     setLoading(true);
     try {
-      // Simulate / pass Google OAuth payload
-      const mockGoogleEmail = email || 'google.freelancer@gmail.com';
-      await loginWithGoogle({
-        email: mockGoogleEmail,
-        full_name: fullName || 'Google User',
-        sub: `google_${Date.now()}`
-      });
+      await loginWithGoogle();
       onClose();
     } catch (err) {
       setError(err.message || 'Google authentication failed.');
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleGuestAccess = () => {
-    continueAsGuest();
-    onClose();
   };
 
   return (
@@ -183,16 +177,6 @@ export function AuthModal({ isOpen, onClose }) {
         </form>
 
         {/* Guest Access Option */}
-        <div className="pt-3 border-t border-slate-100 text-center">
-          <button
-            type="button"
-            onClick={handleGuestAccess}
-            className="text-xs text-slate-500 hover:text-indigo-600 font-medium underline inline-flex items-center gap-1"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-            Continue as Guest (Browse & Use Without Login)
-          </button>
-        </div>
       </div>
     </Modal>
   );

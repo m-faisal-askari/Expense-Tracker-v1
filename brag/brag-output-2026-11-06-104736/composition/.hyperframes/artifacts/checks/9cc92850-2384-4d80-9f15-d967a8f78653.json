@@ -1,0 +1,1547 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 5,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"scene1\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene1",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\IT-HOME\\Downloads\\Projects\\Program Files\\Expense Tracker v1\\brag\\brag-output-2026-11-06-104736\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"scene1\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"scene2\"> is a timeline element that contains nested <div id=\"invoice-window\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene2",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\IT-HOME\\Downloads\\Projects\\Program Files\\Expense Tracker v1\\brag\\brag-output-2026-11-06-104736\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"scene2\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"scene3\"> is a timeline element that contains nested <div id=\"payment-window\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene3",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\IT-HOME\\Downloads\\Projects\\Program Files\\Expense Tracker v1\\brag\\brag-output-2026-11-06-104736\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"scene3\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"scene4\"> is a timeline element that contains nested <div id=\"dashboard-window\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene4",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\IT-HOME\\Downloads\\Projects\\Program Files\\Expense Tracker v1\\brag\\brag-output-2026-11-06-104736\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"scene4\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"scene5\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#scene5",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\IT-HOME\\Downloads\\Projects\\Program Files\\Expense Tracker v1\\brag\\brag-output-2026-11-06-104736\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"scene5\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "duration": 20,
+    "samples": [
+      1.111,
+      3.333,
+      5.556,
+      7.778,
+      10,
+      12.222,
+      14.444,
+      16.667,
+      18.889
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 0,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      1.111,
+      5.556,
+      10,
+      14.444,
+      18.889
+    ],
+    "checked": 167,
+    "passed": 167
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "text_below_floor",
+        "severity": "warning",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 169 text elements stay under it for 0.5 s or more, the smallest \"UNPAID\" at 9 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "text": "UNPAID",
+        "selector": "#invoice-featured-row > div:nth-of-type(4) > span:nth-of-type(1)",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1259.51,
+          "y": 383,
+          "width": 38.49,
+          "height": 11.92
+        },
+        "time": 3.125,
+        "times": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3.125,
+          3.125,
+          3.125,
+          3.125,
+          3.125,
+          3.125,
+          3.125,
+          3.125,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6.875,
+          6.875,
+          6.875,
+          6.875,
+          6.875,
+          6.875,
+          6.875,
+          6.875,
+          6.875,
+          6.875,
+          6.875,
+          6.875,
+          8.875,
+          8.875,
+          8.875,
+          8.875,
+          8.875,
+          8.875,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11.5,
+          11.5,
+          11.5,
+          11.75,
+          11.75,
+          11.75,
+          11.75,
+          11.75,
+          11.75,
+          11.75,
+          11.875,
+          11.875,
+          11.875,
+          14.25,
+          17,
+          17.625
+        ],
+        "fontPx": 8.94,
+        "floorPx": 28,
+        "seconds": 3.5,
+        "elements": [
+          {
+            "selector": "#invoice-featured-row > div:nth-of-type(4) > span:nth-of-type(1)",
+            "text": "UNPAID",
+            "fontPx": 8.94,
+            "time": 3.125,
+            "seconds": 3.5
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > span:nth-of-type(1)",
+            "text": "Invoice Number",
+            "fontPx": 8.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > span:nth-of-type(2)",
+            "text": "Client",
+            "fontPx": 8.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > span:nth-of-type(3)",
+            "text": "Amount",
+            "fontPx": 8.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > span:nth-of-type(4)",
+            "text": "Status",
+            "fontPx": 8.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > span:nth-of-type(5)",
+            "text": "Action",
+            "fontPx": 8.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(4) > span:nth-of-type(1)",
+            "text": "UNPAID",
+            "fontPx": 8.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#payment-row-status-paid",
+            "text": "PAID",
+            "fontPx": 8.98,
+            "time": 8.875,
+            "seconds": 2.125
+          },
+          {
+            "selector": "div.dashboard-content > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Historical monthly movements in USD",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.chart-legend > span:nth-of-type(1)",
+            "text": "Income",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.chart-legend > span:nth-of-type(2)",
+            "text": "Expenses",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.trend-labels > span:nth-of-type(1)",
+            "text": "Jan",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.trend-labels > span:nth-of-type(2)",
+            "text": "Feb",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.trend-labels > span:nth-of-type(3)",
+            "text": "Mar",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.trend-labels > span:nth-of-type(4)",
+            "text": "Apr",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.trend-labels > span:nth-of-type(5)",
+            "text": "May",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.trend-labels > span:nth-of-type(6)",
+            "text": "Jun",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.dashboard-content > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Latest financial movements",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.activity-list > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Invoice payment · Income",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.activity-list > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Software · Expense",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.activity-list > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Invoice payment · Income",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.sample-footer",
+            "text": "SAMPLE DATA · FICTIONAL EXAMPLE",
+            "fontPx": 8.99,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > span:nth-of-type(1)",
+            "text": "Invoice Number",
+            "fontPx": 9,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > span:nth-of-type(2)",
+            "text": "Client",
+            "fontPx": 9,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > span:nth-of-type(3)",
+            "text": "Amount",
+            "fontPx": 9,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > span:nth-of-type(4)",
+            "text": "Status",
+            "fontPx": 9,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > span:nth-of-type(5)",
+            "text": "Action",
+            "fontPx": 9,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-row-status-open",
+            "text": "UNPAID",
+            "fontPx": 9,
+            "time": 6.75,
+            "seconds": 2
+          },
+          {
+            "selector": "div.metric-grid > div:nth-of-type(1) > div:nth-of-type(3)",
+            "text": "Gross: $8,420.00",
+            "fontPx": 9,
+            "time": 11.5,
+            "seconds": 5.5
+          },
+          {
+            "selector": "div.metric-grid > div:nth-of-type(2) > div:nth-of-type(3)",
+            "text": "Personal: $0.00",
+            "fontPx": 9,
+            "time": 11.75,
+            "seconds": 5.25
+          },
+          {
+            "selector": "div.metric-grid > div:nth-of-type(3) > div:nth-of-type(3)",
+            "text": "Received Inflows minus Outflows",
+            "fontPx": 9,
+            "time": 11.75,
+            "seconds": 5.25
+          },
+          {
+            "selector": "div.metric-grid > div:nth-of-type(4) > div:nth-of-type(3)",
+            "text": "Business revenue minus expenses",
+            "fontPx": 9,
+            "time": 11.875,
+            "seconds": 5.125
+          },
+          {
+            "selector": "#confirm-deposit",
+            "text": "Confirm & Deposit",
+            "fontPx": 9.7,
+            "time": 6.875,
+            "seconds": 1.875
+          },
+          {
+            "selector": "#invoice-featured-row > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Issued invoice",
+            "fontPx": 9.93,
+            "time": 3.125,
+            "seconds": 3.5
+          },
+          {
+            "selector": "#invoice-featured-row > div:nth-of-type(2) > div:nth-of-type(2)",
+            "text": "Fictional sample client",
+            "fontPx": 9.93,
+            "time": 3.125,
+            "seconds": 3.5
+          },
+          {
+            "selector": "#invoice-featured-row > div:nth-of-type(3) > div:nth-of-type(2)",
+            "text": "Balance due",
+            "fontPx": 9.93,
+            "time": 3.125,
+            "seconds": 3.5
+          },
+          {
+            "selector": "#invoice-featured-row > button:nth-of-type(1)",
+            "text": "Record Payment",
+            "fontPx": 9.93,
+            "time": 3.125,
+            "seconds": 3.5
+          },
+          {
+            "selector": "div.field-grid > div:nth-of-type(1) > span:nth-of-type(1)",
+            "text": "Payment Received",
+            "fontPx": 9.95,
+            "time": 6.875,
+            "seconds": 1.875
+          },
+          {
+            "selector": "div.field-grid > div:nth-of-type(2) > span:nth-of-type(1)",
+            "text": "Platform / Fee Deducted",
+            "fontPx": 9.95,
+            "time": 6.875,
+            "seconds": 1.875
+          },
+          {
+            "selector": "#payment-form-state > div:nth-of-type(2) > span:nth-of-type(1)",
+            "text": "Deposit To Account",
+            "fontPx": 9.95,
+            "time": 6.875,
+            "seconds": 1.875
+          },
+          {
+            "selector": "#payment-form-state > div:nth-of-type(3) > span:nth-of-type(1)",
+            "text": "Payment Date",
+            "fontPx": 9.95,
+            "time": 6.875,
+            "seconds": 1.875
+          },
+          {
+            "selector": "div.cancel-button",
+            "text": "Cancel",
+            "fontPx": 9.95,
+            "time": 6.875,
+            "seconds": 1.875
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Overview",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(4)",
+            "text": "Financial Management",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(10)",
+            "text": "Freelance Operations",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(15)",
+            "text": "Independent Freelancer",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(15) > div:nth-of-type(1)",
+            "text": "IF",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "SAMPLE DATA",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Issued invoice",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2)",
+            "text": "Fictional sample",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(2)",
+            "text": "Balance due",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(5)",
+            "text": "Sample record",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "div.invoice-foot > span:nth-of-type(1)",
+            "text": "Showing fictional example invoices",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "span.data-note",
+            "text": "All values are sample data",
+            "fontPx": 9.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Overview",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(4)",
+            "text": "Financial Management",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(10)",
+            "text": "Freelance Operations",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(14)",
+            "text": "Financial Planning",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(17)",
+            "text": "Independent Freelancer",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(17) > div:nth-of-type(1)",
+            "text": "IF",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.currency-chip",
+            "text": "◎ View In: ⌄",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.currency-chip > strong:nth-of-type(1)",
+            "text": "USD",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.period-chip",
+            "text": "This Month ⌄",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(3)",
+            "text": "SAMPLE DATA",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.dashboard-content > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Jan — Jun",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.dashboard-content > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "View all →",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.activity-list > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Northstar Studio",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.activity-list > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Workspace subscription",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.activity-list > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Client project",
+            "fontPx": 9.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "span.brand-caption",
+            "text": "Financial operations",
+            "fontPx": 10,
+            "time": 0,
+            "seconds": 2.75
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Overview",
+            "fontPx": 10,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(4)",
+            "text": "Financial Management",
+            "fontPx": 10,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(9)",
+            "text": "Freelance Operations",
+            "fontPx": 10,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(13)",
+            "text": "Independent Freelancer",
+            "fontPx": 10,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(13) > div:nth-of-type(1)",
+            "text": "IF",
+            "fontPx": 10,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "SAMPLE DATA",
+            "fontPx": 10,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Issued invoice",
+            "fontPx": 10,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2)",
+            "text": "Fictional sample client",
+            "fontPx": 10,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2)",
+            "text": "Balance due",
+            "fontPx": 10,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#record-payment-button",
+            "text": "Record Payment",
+            "fontPx": 10,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "div.metric-grid > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Net Cash Received",
+            "fontPx": 10,
+            "time": 11.5,
+            "seconds": 5.5
+          },
+          {
+            "selector": "div.metric-grid > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Total Expenses",
+            "fontPx": 10,
+            "time": 11.75,
+            "seconds": 5.25
+          },
+          {
+            "selector": "div.metric-grid > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Net Cash Flow",
+            "fontPx": 10,
+            "time": 11.75,
+            "seconds": 5.25
+          },
+          {
+            "selector": "div.metric-grid > div:nth-of-type(4) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Operating Profit",
+            "fontPx": 10,
+            "time": 11.875,
+            "seconds": 5.125
+          },
+          {
+            "selector": "div.field-grid > div:nth-of-type(2) > div:nth-of-type(1)",
+            "text": "$0.00",
+            "fontPx": 10.95,
+            "time": 6.875,
+            "seconds": 1.875
+          },
+          {
+            "selector": "#payment-form-state > div:nth-of-type(3) > div:nth-of-type(1)",
+            "text": "Sample date",
+            "fontPx": 10.95,
+            "time": 6.875,
+            "seconds": 1.875
+          },
+          {
+            "selector": "div.search-chip",
+            "text": "⌕ Search invoices...",
+            "fontPx": 10.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "div.primary-button",
+            "text": "＋ Create Invoice",
+            "fontPx": 10.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "div.activity-list > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "+$2,400.00",
+            "fontPx": 10.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.activity-list > div:nth-of-type(2) > div:nth-of-type(2)",
+            "text": "−$42.00",
+            "fontPx": 10.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.activity-list > div:nth-of-type(3) > div:nth-of-type(2)",
+            "text": "+$1,850.00",
+            "fontPx": 10.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.paid-balance > span:nth-of-type(1)",
+            "text": "Invoice balance due",
+            "fontPx": 11,
+            "time": 8.875,
+            "seconds": 2.125
+          },
+          {
+            "selector": "div.paid-balance > span:nth-of-type(2)",
+            "text": "$0.00 · PAID",
+            "fontPx": 11,
+            "time": 8.875,
+            "seconds": 2.125
+          },
+          {
+            "selector": "#payment-toast",
+            "text": "Payment recorded.",
+            "fontPx": 11,
+            "time": 8.875,
+            "seconds": 2.125
+          },
+          {
+            "selector": "div.outro-note",
+            "text": "Financial operations for independent work",
+            "fontPx": 11,
+            "time": 17,
+            "seconds": 3
+          },
+          {
+            "selector": "#invoice-featured-row > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "INV-2026-014",
+            "fontPx": 11.92,
+            "time": 3.125,
+            "seconds": 3.5
+          },
+          {
+            "selector": "#invoice-featured-row > div:nth-of-type(2) > div:nth-of-type(1)",
+            "text": "Northstar Studio",
+            "fontPx": 11.92,
+            "time": 3.125,
+            "seconds": 3.5
+          },
+          {
+            "selector": "#invoice-featured-row > div:nth-of-type(3) > div:nth-of-type(1)",
+            "text": "$2,400.00",
+            "fontPx": 11.92,
+            "time": 3.125,
+            "seconds": 3.5
+          },
+          {
+            "selector": "p.modal-copy",
+            "text": "Payment reduces the balance due.",
+            "fontPx": 11.94,
+            "time": 6.875,
+            "seconds": 4.125
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Freelancer Finance · Invoices",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(3)",
+            "text": "Dashboard",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(5)",
+            "text": "Transactions",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(6)",
+            "text": "Income",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(7)",
+            "text": "Expenses",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(8)",
+            "text": "Accounts",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(9)",
+            "text": "Budgets",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(11)",
+            "text": "Clients",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(12)",
+            "text": "Projects",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(13)",
+            "text": "Invoices",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(14)",
+            "text": "Subscriptions",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Create professional invoices, generate PDFs, and record payment settlements",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "INV-2026-013",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(1)",
+            "text": "Sample Client",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(1)",
+            "text": "$1,850.00",
+            "fontPx": 11.97,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Freelancer Finance · Dashboard",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(3)",
+            "text": "Dashboard",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(5)",
+            "text": "Transactions",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(6)",
+            "text": "Income",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(7)",
+            "text": "Expenses",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(8)",
+            "text": "Accounts",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(9)",
+            "text": "Budgets",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(11)",
+            "text": "Clients",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(12)",
+            "text": "Projects",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(13)",
+            "text": "Invoices",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(15)",
+            "text": "Tax Reserve",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(16)",
+            "text": "Reports & Analytics",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Live authoritative ledger figures for your freelance business",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.dashboard-content > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Income vs Expenses (6 Months)",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "div.dashboard-content > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Recent Activity",
+            "fontPx": 11.98,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Freelancer Finance · Record Payment",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(3)",
+            "text": "Dashboard",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(5)",
+            "text": "Transactions",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(6)",
+            "text": "Income",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(7)",
+            "text": "Expenses",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(8)",
+            "text": "Accounts",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(10)",
+            "text": "Clients",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(11)",
+            "text": "Projects",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(12)",
+            "text": "Invoices",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "Record payment settlements in your ledger",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "INV-2026-014",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1)",
+            "text": "Northstar Studio",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(1)",
+            "text": "$2,400.00",
+            "fontPx": 12,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "div.success-copy",
+            "text": "Income transaction added.",
+            "fontPx": 12,
+            "time": 8.875,
+            "seconds": 2.125
+          },
+          {
+            "selector": "div.field-grid > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "$2,400.00",
+            "fontPx": 12.94,
+            "time": 6.875,
+            "seconds": 1.875
+          },
+          {
+            "selector": "#payment-form-state > div:nth-of-type(2) > div:nth-of-type(1)",
+            "text": "Business Checking",
+            "fontPx": 12.94,
+            "time": 6.875,
+            "seconds": 1.875
+          },
+          {
+            "selector": "div.hook-foot",
+            "text": "A receivable until paid",
+            "fontPx": 13,
+            "time": 0,
+            "seconds": 2.75
+          },
+          {
+            "selector": "div.metric-grid > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(2)",
+            "text": "$",
+            "fontPx": 13,
+            "time": 11.75,
+            "seconds": 5.25
+          },
+          {
+            "selector": "#hook-chips > div:nth-of-type(1)",
+            "text": "INVOICE ISSUED",
+            "fontPx": 14,
+            "time": 0,
+            "seconds": 2.75
+          },
+          {
+            "selector": "div.hook-chip.received",
+            "text": "CASH RECEIVED",
+            "fontPx": 14,
+            "time": 0,
+            "seconds": 2.75
+          },
+          {
+            "selector": "div.eyebrow.hook-kicker",
+            "text": "The ledger distinction",
+            "fontPx": 15,
+            "time": 0,
+            "seconds": 2.75
+          },
+          {
+            "selector": "#dashboard-caption",
+            "text": "Income, expenses, and cash flow.",
+            "fontPx": 15,
+            "time": 14.25,
+            "seconds": 2.75
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "FreelanceFinance",
+            "fontPx": 15.96,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "FreelanceFinance",
+            "fontPx": 15.97,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "FreelanceFinance",
+            "fontPx": 16,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "$",
+            "fontPx": 16.95,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "$",
+            "fontPx": 16.97,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > aside:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "$",
+            "fontPx": 17,
+            "time": 6.75,
+            "seconds": 4.25
+          },
+          {
+            "selector": "div.modal-title",
+            "text": "Record Payment for Invoice #INV-2026-014",
+            "fontPx": 19.9,
+            "time": 6.875,
+            "seconds": 4.125
+          },
+          {
+            "selector": "div.brand-lockup.hook-brand > div:nth-of-type(2)",
+            "text": "Freelancer Finance",
+            "fontPx": 20,
+            "time": 0,
+            "seconds": 2.75
+          },
+          {
+            "selector": "div.outro-tagline",
+            "text": "Complete Financial Operations",
+            "fontPx": 20,
+            "time": 17.625,
+            "seconds": 2.375
+          },
+          {
+            "selector": "div.brand-lockup.hook-brand > div:nth-of-type(1)",
+            "text": "$",
+            "fontPx": 21,
+            "time": 0,
+            "seconds": 2.75
+          },
+          {
+            "selector": "div.success-title",
+            "text": "Payment recorded.",
+            "fontPx": 22,
+            "time": 8.875,
+            "seconds": 2.125
+          },
+          {
+            "selector": "div.metric-value.green",
+            "text": "$8,420.00",
+            "fontPx": 22,
+            "time": 11.5,
+            "seconds": 5.5
+          },
+          {
+            "selector": "div.metric-grid > div:nth-of-type(2) > div:nth-of-type(2)",
+            "text": "$2,310.00",
+            "fontPx": 22,
+            "time": 11.75,
+            "seconds": 5.25
+          },
+          {
+            "selector": "div.metric-value.blue",
+            "text": "$6,110.00",
+            "fontPx": 22,
+            "time": 11.75,
+            "seconds": 5.25
+          },
+          {
+            "selector": "div.metric-grid > div:nth-of-type(4) > div:nth-of-type(2)",
+            "text": "$6,790.00",
+            "fontPx": 22,
+            "time": 11.875,
+            "seconds": 5.125
+          },
+          {
+            "selector": "#invoice-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Invoices",
+            "fontPx": 22.94,
+            "time": 3,
+            "seconds": 3.625
+          },
+          {
+            "selector": "#dashboard-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Financial Overview",
+            "fontPx": 22.96,
+            "time": 11.25,
+            "seconds": 5.75
+          },
+          {
+            "selector": "#payment-window > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)",
+            "text": "Invoices",
+            "fontPx": 23,
+            "time": 6.75,
+            "seconds": 4.25
+          }
+        ]
+      }
+    ],
+    "enabled": true,
+    "step": 0.125,
+    "samples": 160
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

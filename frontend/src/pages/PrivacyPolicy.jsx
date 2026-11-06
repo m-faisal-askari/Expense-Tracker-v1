@@ -264,14 +264,14 @@ export function PrivacyPolicy() {
           </p>
           <div className="p-3.5 bg-slate-900 rounded-xl border border-slate-800 text-xs text-slate-400 space-y-2">
             <p>
-              We utilize browser <strong>localStorage</strong> strictly for functional session authentication tokens:
+              We utilize browser <strong>sessionStorage</strong> for functional authentication session tokens:
             </p>
             <ul className="list-disc list-inside space-y-1 pl-1">
-              <li><code className="text-indigo-400 font-mono">ff_auth_token</code>: Holds your signed JSON Web Token (JWT) authorizing API requests.</li>
-              <li><code className="text-indigo-400 font-mono">sb-*-auth-token</code>: Managed by the Supabase client for refreshing your session.</li>
+              <li>The Supabase client stores the active session for this browser tab and refreshes it when needed.</li>
+              <li>The session access token authorizes requests to the application API.</li>
             </ul>
             <p className="text-[11px] text-slate-500 pt-1">
-              Logging out via the user menu immediately purges these tokens from your browser storage.
+              Logging out via the user menu removes the Supabase session from browser storage.
             </p>
           </div>
         </section>

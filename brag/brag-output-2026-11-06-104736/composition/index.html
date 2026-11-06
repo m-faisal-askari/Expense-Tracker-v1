@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Freelancer Finance — Brag</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --ground: #f6f8fa;
+        --surface: #ffffff;
+        --surface-soft: #f0f3f6;
+        --ink: #0f172a;
+        --body: #334155;
+        --muted: #475569;
+        --line: #e2e8f0;
+        --blue: #2563eb;
+        --blue-soft: rgba(37, 99, 235, 0.09);
+        --green: #059669;
+        --green-soft: #ecfdf5;
+        --red: #d92626;
+        --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--ground);
+        color: var(--body);
+        font-family: var(--font);
+        -webkit-font-smoothing: antialiased;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--ground);
+      }
+      .scene, .clip {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      .scene { background: var(--ground); }
+      .soft-orb {
+        position: absolute;
+        width: 860px;
+        height: 860px;
+        border-radius: 50%;
+        right: -330px;
+        top: -340px;
+        background: radial-gradient(circle, rgba(37, 99, 235, .08), rgba(37, 99, 235, 0) 68%);
+      }
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        color: var(--ink);
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -.04em;
+      }
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: var(--ink);
+        color: #fff;
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .brand-caption {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 650;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .eyebrow {
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+      }
+
+      /* Scene 1: source-grounded hook. It is readable on the first frame. */
+      .hook-brand { position: absolute; left: 148px; top: 104px; }
+      .hook-content { position: absolute; left: 184px; top: 292px; width: 1540px; }
+      .hook-kicker { margin-bottom: 25px; color: var(--blue); }
+      .hook-title {
+        max-width: 1480px;
+        margin: 0;
+        color: var(--ink);
+        font-size: 104px;
+        line-height: 1.04;
+        font-weight: 640;
+        letter-spacing: -.065em;
+      }
+      .hook-title .neq { color: var(--blue); padding: 0 10px; }
+      .hook-rule {
+        width: 570px;
+        height: 4px;
+        margin-top: 40px;
+        border-radius: 2px;
+        background: linear-gradient(90deg, var(--blue), rgba(37, 99, 235, .12));
+        transform-origin: left center;
+      }
+      .hook-chips { display: flex; align-items: center; gap: 14px; margin-top: 35px; }
+      .hook-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 48px;
+        padding: 0 17px;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        background: rgba(255,255,255,.88);
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: .06em;
+      }
+      .hook-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
+      .hook-chip.received .hook-chip-dot { background: #cbd5e1; }
+      .hook-connector { width: 46px; height: 1px; background: #cbd5e1; }
+      .hook-foot { position: absolute; left: 148px; bottom: 82px; color: #475569; font-size: 13px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; }
+
+      /* Product browser frame shared by the invoice and dashboard scenes. */
+      .browser {
+        position: absolute;
+        left: 150px;
+        top: 105px;
+        width: 1620px;
+        height: 790px;
+        overflow: hidden;
+        border: 1px solid #dbe3ed;
+        border-radius: 18px;
+        background: var(--surface);
+        box-shadow: 0 25px 75px rgba(15, 23, 42, .10), 0 3px 10px rgba(15, 23, 42, .035);
+      }
+      .browser-bar {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        border-bottom: 1px solid var(--line);
+        background: #fff;
+      }
+      .window-dots { display: flex; align-items: center; gap: 7px; }
+      .window-dots i { width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1; }
+      .browser-title {
+        margin: 0 auto;
+        padding: 6px 85px;
+        border-radius: 7px;
+        background: #f8fafc;
+        color: #475569;
+        font-size: 12px;
+        font-weight: 550;
+        letter-spacing: .01em;
+      }
+      .browser-spacer { width: 42px; }
+      .app-shell { display: flex; height: calc(100% - 48px); background: #f8fafc; }
+      .sidebar {
+        width: 248px;
+        flex: none;
+        padding: 22px 14px 16px;
+        border-right: 1px solid var(--line);
+        background: #fff;
+      }
+      .side-brand { display: flex; align-items: center; gap: 9px; padding: 2px 8px 22px; color: var(--ink); font-size: 16px; font-weight: 730; letter-spacing: -.04em; }
+      .side-mark { width: 31px; height: 31px; border-radius: 9px; font-size: 17px; }
+      .nav-label { padding: 11px 10px 7px; color: #475569; font-size: 10px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+      .nav-item { display: flex; align-items: center; gap: 10px; margin: 2px 0; padding: 8px 10px; border-radius: 8px; color: #475569; font-size: 12px; font-weight: 540; }
+      .nav-item.active { color: #1d4ed8; background: #eff6ff; font-weight: 700; }
+      .nav-icon { width: 13px; height: 13px; flex: none; border: 1.5px solid currentColor; border-radius: 4px; opacity: .82; }
+      .nav-icon.round { border-radius: 50%; }
+      .nav-icon.lines { position: relative; border: 0; border-radius: 0; }
+      .nav-icon.lines::before, .nav-icon.lines::after { content: ""; position: absolute; left: 1px; right: 1px; height: 1.5px; background: currentColor; }
+      .nav-icon.lines::before { top: 3px; } .nav-icon.lines::after { top: 8px; }
+      .sidebar-user { position: absolute; left: 15px; bottom: 16px; display: flex; align-items: center; gap: 9px; color: #475569; font-size: 10px; }
+      .avatar { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; background: #eff6ff; color: #1d4ed8; font-size: 10px; font-weight: 750; }
+      .app-main { position: relative; flex: 1; min-width: 0; padding: 26px 31px; background: #f8fafc; }
+      .page-head { display: flex; justify-content: space-between; align-items: flex-start; }
+      .page-title { color: var(--ink); font-size: 23px; line-height: 1.1; font-weight: 710; letter-spacing: -.04em; }
+      .page-subtitle { margin-top: 7px; color: #475569; font-size: 12px; }
+      .sample-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; border: 1px solid #bfdbfe; border-radius: 6px; background: #eff6ff; color: #1d4ed8; font-size: 10px; font-weight: 800; letter-spacing: .1em; }
+      .sample-pill i { width: 6px; height: 6px; border-radius: 50%; background: #2563eb; }
+      .toolbar { display: flex; justify-content: space-between; align-items: center; margin-top: 22px; }
+      .search-chip { width: 255px; padding: 9px 11px; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; color: #475569; font-size: 11px; }
+      .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 10px 13px; border-radius: 8px; background: var(--ink); color: #fff; font-size: 11px; font-weight: 700; }
+      .table-card, .panel { border: 1px solid #e2e8f0; border-radius: 12px; background: #fff; box-shadow: 0 2px 5px rgba(15, 23, 42, .02); }
+      .invoice-table { margin-top: 15px; overflow: hidden; }
+      .table-head, .invoice-row { display: grid; grid-template-columns: 1.25fr 1.1fr .9fr .85fr 1.15fr; align-items: center; gap: 12px; padding: 0 17px; }
+      .table-head { height: 41px; border-bottom: 1px solid #edf2f7; background: #fbfcfe; color: #475569; font-size: 9px; font-weight: 760; letter-spacing: .08em; text-transform: uppercase; }
+      .invoice-row { min-height: 75px; color: #334155; font-size: 11px; }
+      .invoice-row.featured { margin: 8px; min-height: 75px; padding: 0 12px; border: 1px solid #bfdbfe; border-radius: 9px; background: #f8fbff; }
+      .invoice-primary { color: var(--ink); font-size: 12px; font-weight: 720; }
+      .invoice-secondary { margin-top: 4px; color: #475569; font-size: 10px; }
+      .amount { color: var(--ink); font-weight: 720; font-variant-numeric: tabular-nums; }
+      .status-open { display: inline-flex; align-items: center; gap: 6px; width: fit-content; padding: 5px 8px; border-radius: 99px; background: #fff7ed; color: #9a3412; font-size: 9px; font-weight: 800; letter-spacing: .04em; }
+      .status-paid { display: inline-flex; align-items: center; gap: 6px; width: fit-content; padding: 5px 8px; border-radius: 99px; background: #ecfdf5; color: #047857; font-size: 9px; font-weight: 800; letter-spacing: .04em; }
+      .status-open i { width: 6px; height: 6px; border-radius: 50%; background: #d97706; }
+      .record-button { justify-self: start; display: inline-flex; align-items: center; gap: 5px; padding: 7px 9px; border: 0; border-radius: 7px; background: var(--green-soft); color: #047857; font-family: inherit; font-size: 10px; font-weight: 750; }
+      .invoice-foot { display: flex; justify-content: space-between; align-items: center; margin: 16px 9px 0; color: #475569; font-size: 10px; }
+      .data-note { color: #475569; font-size: 10px; }
+
+      /* Scene 3: payment entry and confirmed result. */
+      .modal-layer { position: absolute; inset: 220px 0 0; z-index: 5; display: grid; place-items: start center; padding-top: 8px; }
+      .modal-shade { position: absolute; inset: 0; background: rgba(15, 23, 42, .19); }
+      .payment-modal { position: relative; z-index: 1; width: 620px; min-height: 390px; padding: 27px 30px 24px; border: 1px solid #e2e8f0; border-radius: 14px; background: #fff; box-shadow: 0 20px 65px rgba(15, 23, 42, .18); }
+      .modal-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+      .modal-title { color: var(--ink); font-size: 20px; font-weight: 730; letter-spacing: -.035em; }
+      .modal-close { color: #475569; font-size: 20px; line-height: 1; }
+      .modal-copy { margin: 11px 0 20px; color: #475569; font-size: 12px; line-height: 1.5; }
+      .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .field { margin-bottom: 14px; }
+      .field-label { display: block; margin-bottom: 7px; color: #475569; font-size: 10px; font-weight: 650; }
+      .field-value { min-height: 40px; display: flex; align-items: center; padding: 0 11px; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; color: var(--ink); font-size: 13px; font-weight: 680; font-variant-numeric: tabular-nums; }
+      .field-value.light { color: #475569; font-size: 11px; font-weight: 500; }
+      .modal-actions { display: flex; justify-content: flex-end; align-items: center; gap: 9px; margin-top: 4px; padding-top: 17px; border-top: 1px solid #edf2f7; }
+      .cancel-button { padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; color: #475569; font-size: 10px; font-weight: 650; }
+      .confirm-button { padding: 11px 15px; border: 0; border-radius: 8px; background: var(--green); color: #fff; font-family: inherit; font-size: 10px; font-weight: 760; }
+      .pointer { position: absolute; top: 0; left: 0; width: 26px; height: 34px; z-index: 7; opacity: 0; pointer-events: none; }
+      .success-state { display: none; flex-direction: column; align-items: center; justify-content: center; min-height: 320px; text-align: center; }
+      .success-icon { width: 63px; height: 63px; display: grid; place-items: center; margin-bottom: 17px; border: 1px solid #a7f3d0; border-radius: 50%; background: #ecfdf5; color: #047857; font-size: 30px; font-weight: 600; }
+      .success-title { color: var(--ink); font-size: 22px; font-weight: 730; }
+      .success-copy { margin-top: 8px; color: #475569; font-size: 12px; }
+      .toast { position: absolute; right: 30px; top: -38px; z-index: 8; display: flex; align-items: center; gap: 9px; padding: 12px 15px; border: 1px solid #a7f3d0; border-radius: 9px; background: #ecfdf5; color: #065f46; font-size: 11px; font-weight: 700; box-shadow: 0 9px 25px rgba(15, 23, 42, .08); }
+      .toast-check { width: 17px; height: 17px; display: grid; place-items: center; border-radius: 50%; background: #047857; color: white; font-size: 11px; }
+      .paid-balance { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 22px; padding: 13px 15px; border: 1px solid #a7f3d0; border-radius: 9px; background: #f0fdf4; color: #047857; font-size: 11px; font-weight: 700; }
+
+      /* Scene 4: dashboard metrics and income/expense chart. */
+      .currency-chip { display: flex; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; color: #475569; font-size: 10px; font-weight: 650; }
+      .period-chip { margin-left: 8px; padding: 8px 10px; border-radius: 8px; background: #eff6ff; color: #1d4ed8; font-size: 10px; font-weight: 700; }
+      .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; margin-top: 22px; }
+      .metric-card { min-height: 123px; padding: 16px 16px 13px; border: 1px solid #e2e8f0; border-radius: 11px; background: #fff; box-shadow: 0 2px 5px rgba(15, 23, 42, .018); }
+      .metric-top { display: flex; justify-content: space-between; align-items: center; }
+      .metric-label { color: #475569; font-size: 10px; font-weight: 770; letter-spacing: .08em; text-transform: uppercase; }
+      .metric-icon { width: 27px; height: 27px; display: grid; place-items: center; border: 1px solid rgba(37, 99, 235, .2); border-radius: 8px; background: var(--blue-soft); color: var(--blue); font-size: 13px; font-weight: 700; }
+      .metric-value { margin-top: 14px; color: var(--ink); font-size: 22px; font-weight: 730; letter-spacing: -.045em; font-variant-numeric: tabular-nums; }
+      .metric-value.green { color: var(--green); }
+      .metric-value.blue { color: var(--blue); }
+      .metric-note { margin-top: 4px; color: #475569; font-size: 9px; }
+      .dashboard-content { display: grid; grid-template-columns: 1.65fr 1fr; gap: 14px; margin-top: 14px; }
+      .panel-head { display: flex; justify-content: space-between; align-items: flex-start; padding: 15px 17px 8px; }
+      .panel-title { color: var(--ink); font-size: 12px; font-weight: 730; }
+      .panel-subtitle { margin-top: 5px; color: #475569; font-size: 9px; }
+      .chart-wrap { height: 236px; padding: 6px 13px 12px; }
+      .chart-svg { display: block; width: 100%; height: 184px; overflow: visible; }
+      .chart-gridline { stroke: #e8edf4; stroke-width: 1; }
+      .chart-income-area { fill: url(#incomeFill); }
+      .chart-expense-area { fill: url(#expenseFill); }
+      .chart-income-line { fill: none; stroke: #2563eb; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+      .chart-expense-line { fill: none; stroke: #60a5fa; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+      .chart-legend { display: flex; align-items: center; gap: 17px; margin: -2px 18px 0; color: #475569; font-size: 9px; }
+      .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+      .legend-dot { width: 7px; height: 7px; border-radius: 50%; background: #2563eb; }
+      .legend-dot.expense { background: #60a5fa; }
+      .trend-labels { display: flex; justify-content: space-between; padding: 7px 19px 0; color: #475569; font-size: 9px; }
+      .activity-list { padding: 0 16px 10px; }
+      .activity-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-top: 1px solid #f1f5f9; }
+      .activity-main { color: var(--ink); font-size: 10px; font-weight: 680; }
+      .activity-sub { margin-top: 4px; color: #475569; font-size: 9px; }
+      .activity-amount { color: #047857; font-size: 11px; font-weight: 730; font-variant-numeric: tabular-nums; }
+      .sample-footer { position: absolute; right: 27px; bottom: 17px; color: #475569; font-size: 9px; font-weight: 800; letter-spacing: .09em; }
+      .caption-foot { position: absolute; left: 0; right: 0; bottom: 66px; text-align: center; color: #475569; font-size: 15px; font-weight: 580; letter-spacing: -.02em; }
+
+      /* Scene 5: spare product end card. */
+      .outro-wrap { position: absolute; inset: 0; display: grid; place-items: center; }
+      .outro-lockup { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; }
+      .outro-mark { width: 76px; height: 76px; border-radius: 22px; font-size: 38px; box-shadow: 0 12px 32px rgba(15, 23, 42, .12); }
+      .outro-title { margin-top: 25px; color: var(--ink); font-size: 56px; line-height: 1.08; font-weight: 680; letter-spacing: -.06em; }
+      .outro-tagline { margin-top: 13px; color: #475569; font-size: 20px; font-weight: 520; letter-spacing: -.025em; }
+      .outro-rule { width: 220px; height: 3px; margin-top: 32px; border-radius: 2px; background: linear-gradient(90deg, rgba(37, 99, 235, 0), #2563eb, rgba(37, 99, 235, 0)); }
+      .outro-note { position: absolute; left: 148px; bottom: 70px; color: #475569; font-size: 11px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="20" data-fps="30">
+      <section id="scene1" class="scene clip" data-start="0" data-duration="2.73" data-track-index="1">
+        <div class="soft-orb" data-layout-allow-overflow></div>
+        <div class="brand-lockup hook-brand">
+          <div class="brand-mark">$</div>
+          <div>Freelancer Finance<span class="brand-caption">Financial operations</span></div>
+        </div>
+        <div class="hook-content">
+          <div class="eyebrow hook-kicker">The ledger distinction</div>
+          <h1 class="hook-title">Invoice Issuance <span class="neq">≠</span><br />Cash Received</h1>
+          <div id="hook-rule" class="hook-rule"></div>
+          <div id="hook-chips" class="hook-chips">
+            <div class="hook-chip"><i class="hook-chip-dot"></i> INVOICE ISSUED</div>
+            <div class="hook-connector"></div>
+            <div class="hook-chip received"><i class="hook-chip-dot"></i> CASH RECEIVED</div>
+          </div>
+        </div>
+        <div class="hook-foot">A receivable until paid</div>
+      </section>
+
+      <section id="scene2" class="scene clip" data-start="2.73" data-duration="3.83" data-track-index="2">
+        <div id="invoice-window" class="browser">
+          <div class="browser-bar"><div class="window-dots"><i></i><i></i><i></i></div><div class="browser-title">Freelancer Finance &nbsp;·&nbsp; Invoices</div><div class="browser-spacer"></div></div>
+          <div class="app-shell">
+            <aside class="sidebar">
+              <div class="side-brand"><div class="brand-mark side-mark">$</div> FreelanceFinance</div>
+              <div class="nav-label">Overview</div>
+              <div class="nav-item"><i class="nav-icon"></i> Dashboard</div>
+              <div class="nav-label">Financial Management</div>
+              <div class="nav-item"><i class="nav-icon lines"></i> Transactions</div>
+              <div class="nav-item"><i class="nav-icon round"></i> Income</div>
+              <div class="nav-item"><i class="nav-icon round"></i> Expenses</div>
+              <div class="nav-item"><i class="nav-icon"></i> Accounts</div>
+              <div class="nav-item"><i class="nav-icon"></i> Budgets</div>
+              <div class="nav-label">Freelance Operations</div>
+              <div class="nav-item"><i class="nav-icon"></i> Clients</div>
+              <div class="nav-item"><i class="nav-icon"></i> Projects</div>
+              <div class="nav-item active"><i class="nav-icon"></i> Invoices</div>
+              <div class="nav-item"><i class="nav-icon round"></i> Subscriptions</div>
+              <div class="sidebar-user"><div class="avatar">IF</div>Independent Freelancer</div>
+            </aside>
+            <main class="app-main">
+              <div class="page-head">
+                <div><div class="page-title">Invoices</div><div class="page-subtitle">Create professional invoices, generate PDFs, and record payment settlements</div></div>
+                <div class="sample-pill"><i></i> SAMPLE DATA</div>
+              </div>
+              <div class="toolbar"><div class="search-chip">⌕ &nbsp; Search invoices...</div><div class="primary-button">＋ &nbsp; Create Invoice</div></div>
+              <div class="table-card invoice-table">
+                <div class="table-head"><span>Invoice Number</span><span>Client</span><span>Amount</span><span>Status</span><span>Action</span></div>
+                <div class="invoice-row featured" id="invoice-featured-row">
+                  <div><div class="invoice-primary">INV-2026-014</div><div class="invoice-secondary">Issued invoice</div></div>
+                  <div><div class="invoice-primary">Northstar Studio</div><div class="invoice-secondary">Fictional sample client</div></div>
+                  <div><div class="invoice-primary amount">$2,400.00</div><div class="invoice-secondary">Balance due</div></div>
+                  <div><span class="status-open"><i></i> UNPAID</span></div>
+                  <button class="record-button"><span>＋</span> Record Payment</button>
+                </div>
+                <div class="invoice-row">
+                  <div><div class="invoice-primary">INV-2026-013</div><div class="invoice-secondary">Issued invoice</div></div>
+                  <div><div class="invoice-primary">Sample Client</div><div class="invoice-secondary">Fictional sample</div></div>
+                  <div><div class="invoice-primary amount">$1,850.00</div><div class="invoice-secondary">Balance due</div></div>
+                  <div><span class="status-open"><i></i> UNPAID</span></div>
+                  <div class="data-note">Sample record</div>
+                </div>
+              </div>
+              <div class="invoice-foot"><span>Showing fictional example invoices</span><span class="data-note">All values are sample data</span></div>
+            </main>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene3" class="scene clip" data-start="6.56" data-duration="4.37" data-track-index="3">
+        <div id="payment-window" class="browser">
+          <div class="browser-bar"><div class="window-dots"><i></i><i></i><i></i></div><div class="browser-title">Freelancer Finance &nbsp;·&nbsp; Record Payment</div><div class="browser-spacer"></div></div>
+          <div class="app-shell">
+            <aside class="sidebar">
+              <div class="side-brand"><div class="brand-mark side-mark">$</div> FreelanceFinance</div>
+              <div class="nav-label">Overview</div>
+              <div class="nav-item"><i class="nav-icon"></i> Dashboard</div>
+              <div class="nav-label">Financial Management</div>
+              <div class="nav-item"><i class="nav-icon lines"></i> Transactions</div>
+              <div class="nav-item"><i class="nav-icon round"></i> Income</div>
+              <div class="nav-item"><i class="nav-icon round"></i> Expenses</div>
+              <div class="nav-item"><i class="nav-icon"></i> Accounts</div>
+              <div class="nav-label">Freelance Operations</div>
+              <div class="nav-item"><i class="nav-icon"></i> Clients</div>
+              <div class="nav-item"><i class="nav-icon"></i> Projects</div>
+              <div class="nav-item active"><i class="nav-icon"></i> Invoices</div>
+              <div class="sidebar-user"><div class="avatar">IF</div>Independent Freelancer</div>
+            </aside>
+            <main class="app-main">
+              <div class="page-head"><div><div class="page-title">Invoices</div><div class="page-subtitle">Record payment settlements in your ledger</div></div><div class="sample-pill"><i></i> SAMPLE DATA</div></div>
+              <div class="table-card invoice-table">
+                <div class="table-head"><span>Invoice Number</span><span>Client</span><span>Amount</span><span>Status</span><span>Action</span></div>
+                <div class="invoice-row featured"><div><div class="invoice-primary">INV-2026-014</div><div class="invoice-secondary">Issued invoice</div></div><div><div class="invoice-primary">Northstar Studio</div><div class="invoice-secondary">Fictional sample client</div></div><div><div class="invoice-primary amount">$2,400.00</div><div class="invoice-secondary">Balance due</div></div><div><span id="payment-row-status-open" class="status-open"><i></i> UNPAID</span><span id="payment-row-status-paid" class="status-paid" style="display:none"><i></i> PAID</span></div><button id="record-payment-button" class="record-button">Record Payment</button></div>
+              </div>
+              <div class="modal-layer">
+                <div class="modal-shade"></div>
+                <div id="payment-modal" class="payment-modal">
+                <div class="modal-top"><div class="modal-title">Record Payment for Invoice #INV-2026-014</div><div class="modal-close">×</div></div>
+                <p class="modal-copy">Payment reduces the balance due.</p>
+                <div id="payment-form-state">
+                  <div class="field-grid">
+                    <div class="field"><span class="field-label">Payment Received</span><div class="field-value">$2,400.00</div></div>
+                    <div class="field"><span class="field-label">Platform / Fee Deducted</span><div class="field-value light">$0.00</div></div>
+                  </div>
+                  <div class="field"><span class="field-label">Deposit To Account</span><div class="field-value">Business Checking <span style="margin-left:auto;color:#475569">⌄</span></div></div>
+                  <div class="field"><span class="field-label">Payment Date</span><div class="field-value light">Sample date</div></div>
+                  <div class="modal-actions"><div class="cancel-button">Cancel</div><button id="confirm-deposit" class="confirm-button">Confirm &amp; Deposit</button></div>
+                </div>
+                <div id="payment-success" class="success-state">
+                  <div class="success-icon">✓</div>
+                  <div class="success-title">Payment recorded.</div>
+                  <div class="success-copy">Income transaction added.</div>
+                  <div class="paid-balance"><span>Invoice balance due</span><span>$0.00 &nbsp; · &nbsp; PAID</span></div>
+                </div>
+                </div>
+              </div>
+              <div id="payment-toast" class="toast" data-layout-allow-overflow><span class="toast-check">✓</span> Payment recorded.</div>
+              <svg id="payment-cursor" class="pointer" viewBox="0 0 26 34" aria-hidden="true"><path d="M2 1 L2 26 L8.7 19.2 L13.3 30.5 L17.4 28.8 L12.8 17.7 L22 17 Z" fill="#0f172a" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" /></svg>
+            </main>
+          </div>
+        </div>
+      </section>
+
+      <section id="scene4" class="scene clip" data-start="10.93" data-duration="6" data-track-index="4">
+        <div id="dashboard-window" class="browser">
+          <div class="browser-bar"><div class="window-dots"><i></i><i></i><i></i></div><div class="browser-title">Freelancer Finance &nbsp;·&nbsp; Dashboard</div><div class="browser-spacer"></div></div>
+          <div class="app-shell">
+            <aside class="sidebar">
+              <div class="side-brand"><div class="brand-mark side-mark">$</div> FreelanceFinance</div>
+              <div class="nav-label">Overview</div>
+              <div class="nav-item active"><i class="nav-icon"></i> Dashboard</div>
+              <div class="nav-label">Financial Management</div>
+              <div class="nav-item"><i class="nav-icon lines"></i> Transactions</div>
+              <div class="nav-item"><i class="nav-icon round"></i> Income</div>
+              <div class="nav-item"><i class="nav-icon round"></i> Expenses</div>
+              <div class="nav-item"><i class="nav-icon"></i> Accounts</div>
+              <div class="nav-item"><i class="nav-icon"></i> Budgets</div>
+              <div class="nav-label">Freelance Operations</div>
+              <div class="nav-item"><i class="nav-icon"></i> Clients</div>
+              <div class="nav-item"><i class="nav-icon"></i> Projects</div>
+              <div class="nav-item"><i class="nav-icon"></i> Invoices</div>
+              <div class="nav-label">Financial Planning</div>
+              <div class="nav-item"><i class="nav-icon"></i> Tax Reserve</div>
+              <div class="nav-item"><i class="nav-icon"></i> Reports &amp; Analytics</div>
+              <div class="sidebar-user"><div class="avatar">IF</div>Independent Freelancer</div>
+            </aside>
+            <main class="app-main">
+              <div class="page-head">
+                <div><div class="page-title">Financial Overview</div><div class="page-subtitle">Live authoritative ledger figures for your freelance business</div></div>
+                <div style="display:flex;align-items:center"><div class="currency-chip">◎ &nbsp; View In: &nbsp;<strong>USD</strong>⌄</div><div class="period-chip">This Month &nbsp;⌄</div><div class="sample-pill" style="margin-left:10px"><i></i> SAMPLE DATA</div></div>
+              </div>
+              <div class="metric-grid">
+                <div class="metric-card"><div class="metric-top"><div class="metric-label">Net Cash Received</div><div class="metric-icon">↗</div></div><div class="metric-value green">$8,420.00</div><div class="metric-note">Gross: $8,420.00</div></div>
+                <div class="metric-card"><div class="metric-top"><div class="metric-label">Total Expenses</div><div class="metric-icon" style="color:#d92626;border-color:#fecaca;background:#fef2f2">↘</div></div><div class="metric-value">$2,310.00</div><div class="metric-note">Personal: $0.00</div></div>
+                <div class="metric-card"><div class="metric-top"><div class="metric-label">Net Cash Flow</div><div class="metric-icon">$</div></div><div class="metric-value blue">$6,110.00</div><div class="metric-note">Received Inflows minus Outflows</div></div>
+                <div class="metric-card"><div class="metric-top"><div class="metric-label">Operating Profit</div><div class="metric-icon">▦</div></div><div class="metric-value">$6,790.00</div><div class="metric-note">Business revenue minus expenses</div></div>
+              </div>
+              <div class="dashboard-content">
+                <div class="panel">
+                  <div class="panel-head"><div><div class="panel-title">Income vs Expenses (6 Months)</div><div class="panel-subtitle">Historical monthly movements in USD</div></div><div class="data-note">Jan — Jun</div></div>
+                  <div class="chart-wrap">
+                    <svg class="chart-svg" viewBox="0 0 820 184" aria-label="Income and expenses over six months" role="img">
+                      <defs>
+                        <linearGradient id="incomeFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2563eb" stop-opacity=".20"/><stop offset="1" stop-color="#2563eb" stop-opacity=".01"/></linearGradient>
+                        <linearGradient id="expenseFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#60a5fa" stop-opacity=".15"/><stop offset="1" stop-color="#60a5fa" stop-opacity=".01"/></linearGradient>
+                      </defs>
+                      <g>
+                        <path class="chart-gridline" d="M34 20 H798 M34 58 H798 M34 96 H798 M34 134 H798"/>
+                        <path class="chart-income-area" d="M45 122 C100 110 116 90 184 96 S275 63 328 74 S420 89 473 55 S570 67 620 38 S720 51 786 20 V142 H45 Z"/>
+                        <path class="chart-expense-area" d="M45 132 C111 121 126 119 184 119 S267 105 328 113 S420 120 473 101 S566 107 620 90 S720 98 786 79 V142 H45 Z"/>
+                      </g>
+                      <g id="chart-plot">
+                        <path class="chart-income-line" d="M45 122 C100 110 116 90 184 96 S275 63 328 74 S420 89 473 55 S570 67 620 38 S720 51 786 20"/>
+                        <path class="chart-expense-line" d="M45 132 C111 121 126 119 184 119 S267 105 328 113 S420 120 473 101 S566 107 620 90 S720 98 786 79"/>
+                      </g>
+                    </svg>
+                    <div class="chart-legend"><span class="legend-item"><i class="legend-dot"></i>Income</span><span class="legend-item"><i class="legend-dot expense"></i>Expenses</span></div>
+                    <div class="trend-labels"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
+                  </div>
+                </div>
+                <div class="panel">
+                  <div class="panel-head"><div><div class="panel-title">Recent Activity</div><div class="panel-subtitle">Latest financial movements</div></div><div class="data-note">View all &nbsp;→</div></div>
+                  <div class="activity-list">
+                    <div class="activity-row"><div><div class="activity-main">Northstar Studio</div><div class="activity-sub">Invoice payment · Income</div></div><div class="activity-amount">+$2,400.00</div></div>
+                    <div class="activity-row"><div><div class="activity-main">Workspace subscription</div><div class="activity-sub">Software · Expense</div></div><div class="activity-amount" style="color:#d92626">−$42.00</div></div>
+                    <div class="activity-row"><div><div class="activity-main">Client project</div><div class="activity-sub">Invoice payment · Income</div></div><div class="activity-amount">+$1,850.00</div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="sample-footer">SAMPLE DATA · FICTIONAL EXAMPLE</div>
+            </main>
+          </div>
+        </div>
+        <div id="dashboard-caption" class="caption-foot">Income, expenses, and cash flow.</div>
+      </section>
+
+      <section id="scene5" class="scene clip" data-start="16.93" data-duration="3.07" data-track-index="5">
+        <div class="soft-orb" data-layout-allow-overflow></div>
+        <div class="outro-note">Financial operations for independent work</div>
+        <div class="outro-wrap">
+          <div id="outro-lockup" class="outro-lockup">
+            <div class="brand-mark outro-mark">$</div>
+            <div class="outro-title">Freelancer Finance</div>
+            <div class="outro-tagline">Complete Financial Operations</div>
+            <div id="outro-rule" class="outro-rule"></div>
+          </div>
+        </div>
+      </section>
+
+      <audio id="bg-music" data-start="0" data-duration="20" data-track-index="10" data-volume="0.22" data-fade-in="0.4" data-fade-out="0.8" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3"></audio>
+      <audio id="payment-click" data-start="8.19" data-duration="0.01" data-track-index="11" data-volume="0.54" src="assets/sfx/interface/click_003.ogg"></audio>
+      <audio id="payment-confirm" data-start="8.74" data-duration="0.18" data-track-index="12" data-volume="0.60" src="assets/sfx/impact/impactSoft_medium_001.ogg"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines.main = tl;
+
+      tl.fromTo("#invoice-window", { opacity: 0, y: 21, scale: 0.988 }, { opacity: 1, y: 0, scale: 1, duration: 0.46, ease: "power3.out" }, 2.86);
+      tl.fromTo("#invoice-featured-row", { opacity: 0.6, scale: 0.994 }, { opacity: 1, scale: 1, duration: 0.38, ease: "sine.out" }, 3.43);
+
+      tl.fromTo("#payment-window", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.34, ease: "power4.out" }, 6.66);
+      tl.fromTo("#payment-modal", { opacity: 0, y: 15, scale: 0.988 }, { opacity: 1, y: 0, scale: 1, duration: 0.38, ease: "power3.out" }, 6.79);
+      tl.fromTo("#payment-cursor", { opacity: 0, x: 405, y: 655 }, { opacity: 1, x: 906, y: 590, duration: 0.57, ease: "power2.out" }, 7.54);
+      tl.to("#confirm-deposit", { scale: 0.97, duration: 0.09, ease: "power4.out" }, 8.18);
+      tl.to("#confirm-deposit", { scale: 1, duration: 0.18, ease: "power3.out" }, 8.28);
+      tl.to("#payment-cursor", { x: 917, y: 597, duration: 0.12, ease: "power2.inOut" }, 8.15);
+      tl.to("#payment-cursor", { opacity: 0, duration: 0.12, ease: "power2.in" }, 8.31);
+      tl.to("#payment-form-state", { opacity: 0, y: -7, duration: 0.16, ease: "power2.in" }, 8.57);
+      tl.set("#payment-form-state", { display: "none" }, 8.73);
+      tl.set("#payment-success", { display: "flex" }, 8.74);
+      tl.fromTo("#payment-success", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.33, ease: "back.out(1.15)" }, 8.74);
+      tl.fromTo("#payment-toast", { opacity: 0, x: 12 }, { opacity: 1, x: 0, duration: 0.28, ease: "power3.out" }, 8.78);
+      tl.set("#payment-row-status-open", { display: "none" }, 8.73);
+      tl.set("#payment-row-status-paid", { display: "inline-flex" }, 8.74);
+      tl.fromTo("#payment-row-status-paid", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.24, ease: "power3.out" }, 8.74);
+
+      tl.fromTo("#dashboard-window", { opacity: 0, y: 19, scale: 0.99 }, { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: "power3.out" }, 11.08);
+      tl.fromTo(".metric-card", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.39, ease: "power2.out", stagger: 0.11 }, 11.42);
+      tl.fromTo("#chart-plot", { opacity: 0.4, scaleX: 0.62 }, { opacity: 1, scaleX: 1, duration: 0.76, ease: "power3.out" }, 13.11);
+      tl.fromTo("#dashboard-caption", { opacity: 0, y: 9 }, { opacity: 1, y: 0, duration: 0.36, ease: "sine.out" }, 14.08);
+
+      tl.fromTo("#outro-lockup", { opacity: 0, y: 11 }, { opacity: 1, y: 0, duration: 0.48, ease: "power3.out" }, 17.47);
+      tl.fromTo("#outro-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power2.out" }, 18.06);
+      tl.to("#outro-lockup", { scale: 1.008, duration: 0.42, ease: "sine.inOut" }, 19.22);
+    </script>
+  </body>
+</html>

@@ -12,10 +12,12 @@ class Settings(BaseSettings):
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./freelance_finance.db")
     
     # Supabase & Auth
-    SUPABASE_URL: Optional[str] = os.getenv("SUPABASE_URL", "")
+    SUPABASE_URL: Optional[str] = os.getenv("SUPABASE_URL", "https://zdhhqbljyjeeddhnebuu.supabase.co")
     SUPABASE_ANON_KEY: Optional[str] = os.getenv("SUPABASE_ANON_KEY", "")
-    SUPABASE_JWT_SECRET: Optional[str] = os.getenv("SUPABASE_JWT_SECRET", "super-secret-freelance-jwt-token-key-for-development")
-    DEV_AUTH_ENABLED: bool = os.getenv("DEV_AUTH_ENABLED", "True").lower() in ("true", "1", "yes")
+    # Required only for Supabase projects still using legacy HS256 JWT signing.
+    # Never fall back to a known development secret.
+    SUPABASE_JWT_SECRET: Optional[str] = os.getenv("SUPABASE_JWT_SECRET") or None
+    DEV_AUTH_ENABLED: bool = os.getenv("DEV_AUTH_ENABLED", "False").lower() in ("true", "1", "yes")
     
     # Financial Configuration
     DEFAULT_CURRENCY: str = os.getenv("DEFAULT_CURRENCY", "USD")

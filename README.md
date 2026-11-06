@@ -17,7 +17,7 @@ Unlike simple bookkeeping toys or superficial dashboards, **Freelancer Financial
                                           ▼
                ┌────────────────────────────────────────────────────────┐
                │                    FASTAPI BACKEND                     │
-               │      Auth Middleware (Supabase JWT + Dev Auth)         │
+               │      Supabase Auth (verified user access JWTs)         │
                └──────────┬─────────────────────────────────┬───────────┘
                           │                                 │
                           ▼                                 ▼
@@ -161,7 +161,10 @@ npm run build
    - Create a Supabase project.
    - Copy connection string into `DATABASE_URL` in `.env`:
      `DATABASE_URL=postgresql+psycopg2://postgres:<password>@db.<ref>.supabase.co:5432/postgres`
-   - Set `SUPABASE_JWT_SECRET` from Project Settings > API > JWT Secret.
+   - Set `SUPABASE_URL` to the project URL. The backend validates Supabase JWT signatures, issuer, and audience using the project's JWKS.
+   - For projects still using legacy HS256 signing, set `SUPABASE_JWT_SECRET` in the backend environment. Leave it unset for asymmetric signing keys.
+   - Keep `DEV_AUTH_ENABLED=False` in production. Email/password and Google sign-in both use this same Supabase Auth project; there is no separate backend password account path.
+   - The latest migration clears legacy backend SHA-256 password hashes. Signing in to Supabase with the same email links to the existing local account ID and its financial records.
    - Run `alembic upgrade head` to apply all migrations to Supabase.
 2. **Backend Hosting (Render / Railway / Fly.io)**:
    - Build Command: `pip install -r backend/requirements.txt && alembic upgrade head`

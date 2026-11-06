@@ -27,8 +27,10 @@ export function LoginPage() {
         await login(form.email, form.password);
         showSuccess('Welcome back!');
       } else {
-        await register(form.email, form.password, form.full_name);
-        showSuccess('Your account has been created. Welcome!');
+        const result = await register(form.email, form.password, form.full_name);
+        showSuccess(result.confirmation_required
+          ? 'Check your email to confirm your account before signing in.'
+          : 'Your account has been created. Welcome!');
       }
     } catch (err) {
       showError(err.message || 'Authentication failed. Please verify your credentials.');

@@ -1,16 +1,10 @@
-import hashlib
-import uuid
-import jwt
-from datetime import datetime, timedelta
-from typing import Optional
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from backend.app.core.database import get_db
 from backend.app.core.config import settings
 from backend.app.core.security import get_current_user_id, get_current_user_claims
 from backend.app.models.models import UserAccount, UserProfile, Category
 from backend.app.schemas.schemas import (
-    UserRegister, UserLogin, GoogleAuthRequest, AuthResponse,
     UserProfileCreate, UserProfileResponse
 )
 
@@ -41,27 +35,6 @@ DEFAULT_INCOME_CATEGORIES = [
     ("Other Income", "#64748b", "PlusCircle")
 ]
 
-def hash_password(password: str) -> str:
-    salt = "freelance_secret_salt_2026"
-    return hashlib.sha256(f"{password}{salt}".encode()).hexdigest()
-
-def verify_password(plain_password: str, hashed: str) -> bool:
-    return hash_password(plain_password) == hashed
-
-def create_jwt_token(user_id: str, email: str, full_name: Optional[str] = None) -> str:
-    payload = {
-        "sub": user_id,
-        "email": email,
-        "name": full_name or email.split("@")[0],
-        "user_metadata": {
-            "full_name": full_name or email.split("@")[0],
-            "email": email
-        },
-        "exp": datetime.utcnow() + timedelta(days=30),
-        "iat": datetime.utcnow()
-    }
-    return jwt.encode(payload, settings.SUPABASE_JWT_SECRET, algorithm="HS256")
-
 def seed_default_categories(db: Session, user_id: str):
     existing = db.query(Category).filter(Category.user_id == user_id).first()
     if existing:
@@ -89,122 +62,6 @@ def seed_default_categories(db: Session, user_id: str):
         ))
     db.commit()
 
-@router.post("/register", response_model=AuthResponse)
-def register_user(data: UserRegister, db: Session = Depends(get_db)):
-    email_clean = data.email.strip().lower()
-    existing = db.query(UserAccount).filter(UserAccount.email == email_clean).first()
-    if existing:
-        raise HTTPException(status_code=400, detail="Account with this email already exists.")
-
-    new_user = UserAccount(
-        email=email_clean,
-        password_hash=hash_password(data.password),
-        full_name=data.full_name or email_clean.split("@")[0],
-        auth_provider="email"
-    )
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-
-    # Initialize Profile & default categories
-    profile = UserProfile(
-        user_id=new_user.id,
-        full_name=new_user.full_name,
-        email=new_user.email,
-        base_currency=settings.DEFAULT_CURRENCY,
-        fiscal_year_start=1,
-        country="US"
-    )
-    db.add(profile)
-    db.commit()
-    seed_default_categories(db, new_user.id)
-
-    token = create_jwt_token(new_user.id, new_user.email, new_user.full_name)
-    return {
-        "access_token": token,
-        "token_type": "bearer",
-        "user_id": new_user.id,
-        "email": new_user.email,
-        "full_name": new_user.full_name
-    }
-
-@router.post("/login", response_model=AuthResponse)
-def login_user(data: UserLogin, db: Session = Depends(get_db)):
-    email_clean = data.email.strip().lower()
-    user = db.query(UserAccount).filter(UserAccount.email == email_clean).first()
-    if not user or not user.password_hash or not verify_password(data.password, user.password_hash):
-        raise HTTPException(status_code=401, detail="Invalid email or password.")
-
-    token = create_jwt_token(user.id, user.email, user.full_name)
-    return {
-        "access_token": token,
-        "token_type": "bearer",
-        "user_id": user.id,
-        "email": user.email,
-        "full_name": user.full_name
-    }
-
-@router.post("/google", response_model=AuthResponse)
-def google_auth(data: GoogleAuthRequest, db: Session = Depends(get_db)):
-    # Support Google sign-in payload
-    email = data.email or (f"google_user_{data.sub or uuid.uuid4().hex[:6]}@gmail.com")
-    email_clean = email.strip().lower()
-
-    user = db.query(UserAccount).filter(UserAccount.email == email_clean).first()
-    if not user:
-        user = UserAccount(
-            email=email_clean,
-            full_name=data.full_name or email_clean.split("@")[0].title(),
-            auth_provider="google",
-            provider_id=data.sub
-        )
-        db.add(user)
-        db.commit()
-        db.refresh(user)
-
-        profile = UserProfile(
-            user_id=user.id,
-            full_name=user.full_name,
-            email=user.email,
-            base_currency=settings.DEFAULT_CURRENCY,
-            fiscal_year_start=1,
-            country="US"
-        )
-        db.add(profile)
-        db.commit()
-        seed_default_categories(db, user.id)
-    else:
-        if data.full_name and data.full_name != user.full_name:
-            user.full_name = data.full_name
-            db.commit()
-            
-        profile = db.query(UserProfile).filter(UserProfile.user_id == user.id).first()
-        if not profile:
-            profile = UserProfile(
-                user_id=user.id,
-                full_name=user.full_name,
-                email=user.email,
-                base_currency=settings.DEFAULT_CURRENCY,
-                fiscal_year_start=1,
-                country="US"
-            )
-            db.add(profile)
-            db.commit()
-            seed_default_categories(db, user.id)
-        elif data.full_name and (not profile.full_name or profile.full_name in ("Independent Freelancer", "Guest Freelancer")):
-            profile.full_name = data.full_name
-            profile.email = user.email
-            db.commit()
-
-    token = create_jwt_token(user.id, user.email, user.full_name)
-    return {
-        "access_token": token,
-        "token_type": "bearer",
-        "user_id": user.id,
-        "email": user.email,
-        "full_name": user.full_name
-    }
-
 @router.get("/me")
 def get_current_user_info(claims: dict = Depends(get_current_user_claims), db: Session = Depends(get_db)):
     user_id = claims["user_id"]
@@ -214,7 +71,7 @@ def get_current_user_info(claims: dict = Depends(get_current_user_claims), db: S
     user = db.query(UserAccount).filter(UserAccount.id == user_id).first()
     profile = db.query(UserProfile).filter(UserProfile.user_id == user_id).first()
 
-    if not profile and user_id != "guest-freelancer-user":
+    if not profile:
         profile = UserProfile(
             user_id=user_id,
             full_name=token_name or (user.full_name if user else "Independent Freelancer"),
@@ -227,7 +84,7 @@ def get_current_user_info(claims: dict = Depends(get_current_user_claims), db: S
         db.commit()
         db.refresh(profile)
         seed_default_categories(db, user_id)
-    elif profile and user_id != "guest-freelancer-user":
+    else:
         updated = False
         if token_email and (not profile.email or "@freelancer.local" in profile.email):
             profile.email = token_email
@@ -239,13 +96,13 @@ def get_current_user_info(claims: dict = Depends(get_current_user_claims), db: S
             db.commit()
             db.refresh(profile)
 
-    email = token_email or (user.email if user else (profile.email if profile else "guest@freelancer.local"))
+    email = token_email or (user.email if user else (profile.email if profile else ""))
     full_name = token_name or (profile.full_name if profile else (user.full_name if user else "Freelancer"))
 
     return {
         "user_id": user_id,
-        "is_authenticated": user_id != "guest-freelancer-user",
-        "is_guest": user_id == "guest-freelancer-user",
+        "is_authenticated": True,
+        "is_guest": False,
         "email": email,
         "full_name": full_name,
         "base_currency": profile.base_currency if profile else settings.DEFAULT_CURRENCY
@@ -261,7 +118,7 @@ def get_user_profile(claims: dict = Depends(get_current_user_claims), db: Sessio
     if not profile:
         profile = UserProfile(
             user_id=user_id,
-            full_name=token_name or ("Guest Freelancer" if user_id == "guest-freelancer-user" else "Independent Freelancer"),
+            full_name=token_name or "Independent Freelancer",
             email=token_email or (f"{user_id}@freelancer.local" if "@" not in user_id else user_id),
             base_currency=settings.DEFAULT_CURRENCY,
             fiscal_year_start=1,
@@ -293,15 +150,14 @@ def update_user_profile(data: UserProfileCreate, user_id: str = Depends(get_curr
         db.add(profile)
     
     for key, value in data.dict(exclude_unset=True).items():
+        if key == "email":
+            continue
         setattr(profile, key, value)
         
     user = db.query(UserAccount).filter(UserAccount.id == user_id).first()
     if user:
         if profile.full_name:
             user.full_name = profile.full_name
-        if profile.email:
-            user.email = profile.email
-
     db.commit()
     db.refresh(profile)
     seed_default_categories(db, user_id)

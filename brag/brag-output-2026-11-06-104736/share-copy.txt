@@ -1,0 +1,5 @@
+Freelancer Finance keeps an invoice in receivables until the payment lands. Once recorded, the balance clears and the income appears in the ledger and dashboard.
+
+Built for freelancers who want cash flow to reflect cash received.
+
+Music: Sascha Ende, ende.app (CC BY 4.0).

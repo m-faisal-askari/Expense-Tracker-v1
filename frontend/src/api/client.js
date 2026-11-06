@@ -1,15 +1,15 @@
+import { supabase } from './supabase';
+
 const API_BASE_URL = (import.meta.env.VITE_API_URL !== undefined && import.meta.env.VITE_API_URL !== '')
   ? import.meta.env.VITE_API_URL
   : 'https://patient-fern-1718.fly.dev';
 
 const BASE_URL = API_BASE_URL ? `${API_BASE_URL.replace(/\/$/, '')}/api/v1` : '/api/v1';
 
-export function getAuthToken() {
-  return localStorage.getItem('ff_auth_token') || '';
-}
-
-export function setAuthToken(token) {
-  localStorage.setItem('ff_auth_token', token);
+export async function getAuthToken() {
+  const { data, error } = await supabase.auth.getSession();
+  if (error) return '';
+  return data?.session?.access_token || '';
 }
 
 /**
@@ -79,7 +79,7 @@ function extractErrorMessage(errorData, fallbackText = 'An unexpected error occu
 }
 
 export async function fetchApi(endpoint, options = {}) {
-  const token = getAuthToken();
+  const token = await getAuthToken();
   const headers = {
     'Content-Type': 'application/json',
     ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
@@ -136,7 +136,7 @@ export const api = {
   }),
 
   uploadFile: async (url, file, extraData = {}) => {
-    const token = getAuthToken();
+    const token = await getAuthToken();
     const formData = new FormData();
     formData.append('file', file);
     Object.entries(extraData).forEach(([k, v]) => {
@@ -163,7 +163,7 @@ export const api = {
   },
 
   downloadBlob: async (url, filename) => {
-    const token = getAuthToken();
+    const token = await getAuthToken();
     const response = await fetch(`${BASE_URL}${url}`, {
       headers: {
         ...(token ? { 'Authorization': `Bearer ${token}` } : {})
