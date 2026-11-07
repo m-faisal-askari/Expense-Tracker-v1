@@ -14,6 +14,7 @@ import {
   Globe
 } from 'lucide-react';
 import { ThemeToggle } from '../components/ThemeToggle';
+import { FRONTEND_URL } from '../config/urls';
 
 export function PrivacyPolicy() {
   const lastUpdated = "November 6, 2026";
@@ -310,7 +311,7 @@ export function PrivacyPolicy() {
           <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 space-y-1">
             <p><span className="text-slate-500">Service:</span> Freelancer Financial Management Platform</p>
             <p><span className="text-slate-500">Contact Email:</span> <a href="mailto:privacy@freelancefinance.dev" className="text-indigo-400 hover:underline">privacy@freelancefinance.dev</a></p>
-            <p><span className="text-slate-500">Production App URL:</span> <a href="https://expense-tracker-v1-xi.vercel.app" className="text-indigo-400 hover:underline">https://expense-tracker-v1-xi.vercel.app</a></p>
+            <p><span className="text-slate-500">Production App URL:</span> <a href={FRONTEND_URL} className="text-indigo-400 hover:underline">{FRONTEND_URL}</a></p>
           </div>
         </section>
 

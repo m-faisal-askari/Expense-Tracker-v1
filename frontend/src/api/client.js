@@ -1,8 +1,5 @@
 import { supabase } from './supabase';
-
-const API_BASE_URL = (import.meta.env.VITE_API_URL !== undefined && import.meta.env.VITE_API_URL !== '')
-  ? import.meta.env.VITE_API_URL
-  : 'https://patient-fern-1718.fly.dev';
+import { API_BASE_URL } from '../config/urls';
 
 const BASE_URL = API_BASE_URL ? `${API_BASE_URL.replace(/\/$/, '')}/api/v1` : '/api/v1';
 

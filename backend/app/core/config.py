@@ -23,14 +23,20 @@ class Settings(BaseSettings):
     DEFAULT_CURRENCY: str = os.getenv("DEFAULT_CURRENCY", "USD")
     SUPPORTED_CURRENCIES: List[str] = ["USD", "PKR", "EUR", "GBP", "CAD", "AUD", "INR", "JPY", "SGD"]
     
-    # CORS
-    CORS_ORIGINS: List[str] = [
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:3000",
-        "https://patient-fern-1718.fly.dev",
-        "https://expense-tracker-v1-xi.vercel.app"
-    ]
+    # Public frontend origin allowed to call the backend. Additional origins
+    # can be provided as a comma-separated CORS_ORIGINS environment variable.
+    FRONTEND_URL: str = ""
+    CORS_ORIGINS: str = ""
+
+    @property
+    def cors_origins(self) -> List[str]:
+        origins = [
+            origin.strip().rstrip("/")
+            for origin in self.CORS_ORIGINS.split(",")
+            if origin.strip()
+        ]
+        if self.FRONTEND_URL:
+            origins.insert(0, self.FRONTEND_URL.strip().rstrip("/"))
+        return list(dict.fromkeys(origins))
 
 settings = Settings()

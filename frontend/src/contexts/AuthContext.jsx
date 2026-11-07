@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { api } from '../api/client';
 import { supabase } from '../api/supabase';
+import { FRONTEND_URL } from '../config/urls';
 import { useQueryClient } from '@tanstack/react-query';
 
 const AuthContext = createContext(null);
@@ -123,11 +124,11 @@ export function AuthProvider({ children }) {
   const loginWithGoogle = async () => {
     const targetOrigin = typeof window !== 'undefined'
       ? window.location.origin
-      : (import.meta.env.VITE_SITE_URL || 'https://expense-tracker-v1-xi.vercel.app');
+      : FRONTEND_URL;
 
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: targetOrigin.replace(/\/$/, '') }
+      options: { redirectTo: targetOrigin ? targetOrigin.replace(/\/$/, '') : undefined }
     });
     if (error) throw error;
     return data;

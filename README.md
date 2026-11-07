@@ -169,11 +169,13 @@ npm run build
 2. **Backend Hosting (Render / Railway / Fly.io)**:
    - Build Command: `pip install -r backend/requirements.txt && alembic upgrade head`
    - Start Command: `uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT`
+   - Environment variable: `FRONTEND_URL=https://your-frontend-domain.com`
 3. **Frontend Hosting (Vercel / Cloudflare Pages)**:
    - Root directory: `frontend`
    - Build Command: `npm run build`
    - Output directory: `dist`
-   - Environment variables: `VITE_API_URL=https://your-backend-domain.com`
+   - Environment variables: `VITE_API_URL=https://your-backend-domain.com` and `VITE_SITE_URL=https://your-frontend-domain.com`
+   - Copy `frontend/.env.example` to `frontend/.env` and set the URLs for local configuration. Configure the matching `FRONTEND_URL` in the backend environment for CORS.
 
 ---
 
